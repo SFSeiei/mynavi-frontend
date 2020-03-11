@@ -1,0 +1,60 @@
+import { all, call, put,takeEvery, select } from 'redux-saga/effects'
+import { openSnackbar } from 'reducers/messageReducer'
+import {
+  searchOperationLogList,
+  setOperationLog,
+  setOperationLogPrim,
+  selectOperationLog,
+  setOperationLogSearchDate,
+  setSuggestList,
+  searchSuggestList,
+} from 'reducers/operationLogReducer';
+import {
+  searchRequest,
+  outputCsvRequest,
+  searchInit
+} from 'apis/MAAFS010Api';
+import { getOperationLogList } from 'selectors';
+import { magiContants } from 'utils/contants';
+
+function* searchSaga(action: ReturnType<typeof searchOperationLogList>) {
+  try {
+    const data = yield call(searchRequest, action.payload);
+    if(data.length == 0){
+      yield put(openSnackbar(magiContants.MESSAGECODE_RESULT_NULL))
+    }
+    yield put(setOperationLog(data));
+  } catch (error) {
+    yield put(openSnackbar(error.message));
+  }
+}
+
+function* setSearchDate(action: ReturnType<typeof setOperationLogSearchDate>) {
+  yield put(setOperationLogPrim(action.payload));
+}
+
+function* initSaga() {
+  const data = yield call(searchInit);
+  yield put(setSuggestList(data));
+}
+
+function* outputCsv(action: ReturnType<typeof selectOperationLog>) {
+  try {
+    const operationLogList: ReturnType<typeof  getOperationLogList> = yield select(
+      getOperationLogList);
+   const data = yield call(outputCsvRequest, operationLogList);
+   if(data == null){
+     yield put(openSnackbar(magiContants.MESSAGECODE_CSV_SUCCESS))
+   }
+  } catch (error) {
+    yield put(openSnackbar(error.message));
+  }
+}
+export default function* operationLogSaga() {
+  yield all([
+    takeEvery(searchOperationLogList, searchSaga),
+    takeEvery(setOperationLogSearchDate,setSearchDate),
+    takeEvery(searchSuggestList,initSaga),
+    takeEvery(selectOperationLog,outputCsv),
+  ])
+}

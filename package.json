@@ -1,0 +1,135 @@
+{
+  "name": "frontend",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@babel/polyfill": "^7.8.3",
+    "@date-io/moment": "1.x",
+    "@material-ui/core": "^4.4.3",
+    "@material-ui/icons": "^4.4.3",
+    "@material-ui/pickers": "^3.2.8",
+    "@openfonts/noto-sans-jp_japanese": "^1.44.0",
+    "@types/draft-js": "^0.10.38",
+    "@types/jest": "24.0.18",
+    "@types/js-cookie": "^2.2.3",
+    "@types/node": "12.7.7",
+    "@types/react": "^16.9.23",
+    "@types/react-beautiful-dnd": "^11.0.3",
+    "@types/react-dom": "^16.9.5",
+    "@types/react-dropzone": "^5.1.0",
+    "@types/react-helmet": "^5.0.10",
+    "@types/react-paginate": "^6.2.1",
+    "@types/react-redux": "^7.1.4",
+    "@types/react-router-config": "^5.0.1",
+    "@types/react-router-dom": "^4.3.5",
+    "@types/react-select": "^3.0.10",
+    "@types/xregexp": "^3.0.30",
+    "@types/yup": "^0.26.24",
+    "axios": "^0.19.0",
+    "axios-mock-adapter": "^1.17.0",
+    "draft-js": "^0.11.4",
+    "formik": "^1.5.8",
+    "immutable": "^4.0.0-rc.12",
+    "js-cookie": "^2.2.1",
+    "md-draft-js": "^3.4.2",
+    "moment": "^2.24.0",
+    "react": "^16.13.0",
+    "react-app-polyfill": "^1.0.5",
+    "react-beautiful-dnd": "^12.1.1",
+    "react-dnd": "^10.0.2",
+    "react-dnd-html5-backend": "^10.0.2",
+    "react-dom": "^16.13.0",
+    "react-helmet": "^5.2.1",
+    "react-markdown": "^4.3.1",
+    "react-mde": "^8.0.1",
+    "react-paginate": "^6.3.2",
+    "react-perfect-scrollbar": "^1.5.3",
+    "react-redux": "^7.1.1",
+    "react-router-config": "^5.1.0",
+    "react-router-dom": "^5.1.0",
+    "react-scripts": "3.1.2",
+    "react-select": "^3.0.8",
+    "react-spring": "^8.0.27",
+    "redux-saga": "^1.1.1",
+    "redux-starter-kit": "^0.7.0",
+    "serve": "^11.2.0",
+    "typescript": "3.6.3",
+    "xregexp": "^4.3.0",
+    "yup": "^0.27.0"
+  },
+  "scripts": {
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "eject": "react-app-rewired eject",
+    "serve": "serve -s build",
+    "storybook": "start-storybook -p 9009 -s public",
+    "pretty": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\"",
+    "add-locale": "lingui add-locale",
+    "extract": "lingui extract",
+    "compile": "lingui compile",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "build-storybook": "build-storybook -s public"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "plugin:@typescript-eslint/recommended"
+    ],
+    "rules": {
+      "@typescript-eslint/explicit-function-return-type": "off",
+      "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/member-delimiter-style": "off"
+    }
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all",
+      "ie 11"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version",
+      "ie 11"
+    ]
+  },
+  "devDependencies": {
+    "@babel/core": "^7.6.2",
+    "@lingui/cli": "^2.8.3",
+    "@lingui/loader": "^2.8.3",
+    "@lingui/macro": "^2.8.3",
+    "@storybook/addon-actions": "^5.3.13",
+    "@storybook/addon-links": "^5.3.13",
+    "@storybook/addons": "^5.3.13",
+    "@storybook/preset-create-react-app": "^1.5.2",
+    "@storybook/react": "^5.3.13",
+    "@testing-library/jest-dom": "^4.1.0",
+    "@testing-library/react": "^9.3.0",
+    "@types/faker": "^4.1.5",
+    "@types/lingui__macro": "^2.7.3",
+    "@types/lingui__react": "^2.8.1",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-loader": "^8.0.6",
+    "customize-cra": "^0.9.1",
+    "customize-cra-react-refresh": "^1.0.1",
+    "faker": "^4.1.0",
+    "husky": "^3.0.5",
+    "lint-staged": "^9.3.0",
+    "prettier": "^1.18.2",
+    "react-app-rewired": "^2.1.5"
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  }
+}
