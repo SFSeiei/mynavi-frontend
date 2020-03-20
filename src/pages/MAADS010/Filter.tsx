@@ -104,6 +104,7 @@ const useStyles = makeStyles(theme => ({
     lineHeight:'inherit',
     marginLeft: '0',
     width: '100px',
+    marginTop: '12px',
   },
 }))
 

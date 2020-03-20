@@ -52,14 +52,12 @@ const Filter = ({ onFilter }: Props) => {
   const companyAccountSearchCondition = useSelector(
     (state: RootState) => state.company.companyAccountSearchCondition
   )
-  const [initialValue] = useState(
-    Object.keys(companyAccountSearchCondition).length !== 0 ? companyAccountSearchCondition : initialValues
-  )
 
   return (
     <Card>
       <Formik
-        initialValues={initialValue}
+        initialValues={companyAccountSearchCondition}
+        enableReinitialize
         validationSchema={MAACS040QueryRequestValidation}
         onSubmit={onFilter}>
         <Form className={magiClasses.rootList}>

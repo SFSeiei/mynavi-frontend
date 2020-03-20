@@ -2,7 +2,7 @@ import { Divider, FormControl, Paper, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { FieldProps } from 'formik'
 import { Editor, EditorState, RichUtils } from 'md-draft-js'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import EditorToolbar from './EditorToolbar'
 
 const useStyles = makeStyles(theme => ({
@@ -48,9 +48,12 @@ const MarkDownEditor = ({ field, form, maxAmount, ...others }: Props) => {
   const classes = useStyles()
   const { name, value } = field
   const { errors, touched } = form
-  const [editorState, setEditorState] = useState(
-    value ? EditorState.createWithContent(value) : EditorState.createEmpty()
-  )
+  // const [editorState, setEditorState] = useState(EditorState.createWithContent(value))
+  const [editorState, setEditorState] = useState(EditorState.createEmpty())
+
+  useEffect(()=>{
+    setEditorState(EditorState.createWithContent(value))
+  },[value])
 
   const handelOnChange = (editorState: any) => {
     if (maxAmount && maxAmount >= EditorState.getText(editorState).length) {
@@ -62,7 +65,8 @@ const MarkDownEditor = ({ field, form, maxAmount, ...others }: Props) => {
         )
       )
     }
-    form.setFieldValue(name, EditorState.getText(editorState))
+    form.setFieldTouched(name, true, true)
+    form.setFieldValue(name, EditorState.getText(editorState), true)
   }
 
   const handleClick = (command: string) => () => {
@@ -89,10 +93,11 @@ const MarkDownEditor = ({ field, form, maxAmount, ...others }: Props) => {
           <EditorToolbar onClick={handleClick} onLink={handleLink} />
           <Divider />
           <Editor
-            {...others}
+            name={name}
             className={classes.editorContainer}
             editorState={editorState}
             onChange={handelOnChange}
+            autoFocus={false}
           />
           <Divider />
         </Paper>

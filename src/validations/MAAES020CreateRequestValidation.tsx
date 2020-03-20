@@ -70,6 +70,7 @@ export default yup.object().shape({
   // -
   publicEndDate: yup
     .string()
+    .nullable()
     .max(10, validationMessageSet.maxLength)
     .test('isDate', validationMessageSet.date, (value: any) =>
       miscRegexSet.date.test(value)
@@ -79,15 +80,10 @@ export default yup.object().shape({
   // -
   fileSelected: yup
     .mixed()
-    // .test(
-    //   'sizeLimt',
-    //   validationMessageSet.sizeLimt,
-    //   (value: any) => value && value.size <= 10
-    // ),
-    // .test(
-    //   'fileSelected',
-    //   '添付ファイルサイズ上限: 10MB/件',
-    //   (fileList: File[]) =>
-    //     fileList.every((file: File) => file.size <= 1024 * 1024 * 10)
-    // ),
+    .test(
+      'fileSelected',
+      '添付ファイルサイズ上限: 10MB/件',
+      (fileList: File[]) =>
+        fileList.every((file: File) => file.size <= 1024 * 1024 * 10)
+    ),
 })

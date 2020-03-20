@@ -36,13 +36,9 @@ import Preview from './Preview'
 import MarkDownEditor from './MarkDownEditor'
 import TextareaAutosize from './TextareaAutosize'
 import MAAES020CreateRequestValidation from 'validations/MAAES020CreateRequestValidation'
-import {
-  initialCreate,
-} from 'reducers/notificationReducer'
+import { initialCreate } from 'reducers/notificationReducer'
 import magiStyles from 'css/magiStyle'
-import {
-  createNotificationRequest,
-} from 'apis/MAAES020Api'
+import { createNotificationRequest } from 'apis/MAAES020Api'
 import { getMessage } from 'common/messageUtil'
 import { magiContants } from 'utils/contants'
 
@@ -74,10 +70,13 @@ const MAAES020 = () => {
   if (state) {
     newsId = history.location.state.notiInfo.newsId
   }
+  console.log(newsId)
+  // 画面初期検索
   useEffect(() => {
     if (newsId !== -1) {
       dispatch(initialCreate(newsId))
     }
+    return
   }, [newsId, dispatch])
 
   // 「登録する」ボタンクリック
@@ -108,11 +107,13 @@ const MAAES020 = () => {
     setDialogOpen(false)
   }
 
+  // 一覧画面へ戻る
   const backToNotification = () => {
     setDialogOpen(false)
     history.push(routeList.notification)
   }
 
+  // サブミット
   const submitToApi = () => {
     createNotificationRequest(formValues).then(response => {
       backToNotification()
@@ -148,11 +149,15 @@ const MAAES020 = () => {
                 )
               })
             ) {
-              errors.fileSelected = getMessage(magiContants.MESSAGECODE_MAAES020_005)
+              errors.fileSelected = getMessage(
+                magiContants.MESSAGECODE_MAAES020_005
+              )
               return errors
             }
             if (values.fileSelected.length > 10) {
-              errors.fileSelected = getMessage(magiContants.MESSAGECODE_MAAES020_001)
+              errors.fileSelected = getMessage(
+                magiContants.MESSAGECODE_MAAES020_001
+              )
               return errors
             }
           }}
@@ -203,17 +208,17 @@ const MAAES020 = () => {
                   <Grid item xs={12} className={magiClasses.formGroup}>
                     <Label>公開対象</Label>
                     <Grid container alignItems='center'>
-                      <Grid item xs={6} className={magiClasses.formGroup}>
+                      <Grid item xs={4} className={magiClasses.formGroup}>
                         <div>
-                        <FastField
-                          name='newsTargetCompany'
-                          label='公開対象'
-                          component={TextareaAutosize}
-                          className={magiClasses.newsTargetCompany}
-                        />
+                          <FastField
+                            name='newsTargetCompany'
+                            label='公開対象'
+                            component={TextareaAutosize}
+                            className={magiClasses.newsTargetCompany}
+                          />
                         </div>
                       </Grid>
-                      <Grid item xs={5} className={magiClasses.formGroup}>
+                      <Grid item xs={8} className={magiClasses.formGroup}>
                         <Typography>※公開対象</Typography>
                         <Typography>
                           　指定しない場合はすべての企業に表示されます。
@@ -271,23 +276,27 @@ const MAAES020 = () => {
                   </Grid>
                 </Grid>
                 <Grid item xs={12} className={magiClasses.formGroup}>
-                  <Label>ファイル選択</Label>
-                  <Grid container alignItems='center'>
-                    <Grid item xs={8}>
-                      <FastField
-                        component={FilesDropzone}
-                        name='fileSelected'
-                        label='ファイル選択'
-                      />
+                  <React.Fragment key='fileSelected'>
+                    <Label>ファイル選択</Label>
+                    <Grid container alignItems='center'>
+                      <Grid item xs={8}>
+                        <FastField
+                          component={FilesDropzone}
+                          name='fileSelected'
+                          label='ファイル選択'
+                        />
+                      </Grid>
+                      <Grid item xs={4} className={magiClasses.formGroup}>
+                        <Typography>※添付ファイル数上限　　：10件</Typography>
+                        <Typography>
+                          　添付ファイルサイズ上限：10MB/件
+                        </Typography>
+                        <Typography>　対応拡張子は下記の通りです。</Typography>
+                        <Typography>　doc,gif,jpg,jpeg,pdf,png,pps</Typography>
+                        <Typography>　,ppt,pptx,txt,xls,docx,xlsx</Typography>
+                      </Grid>
                     </Grid>
-                    <Grid item xs={4} className={magiClasses.formGroup}>
-                      <Typography>※添付ファイル数上限　　：10件</Typography>
-                      <Typography>　添付ファイルサイズ上限：10MB/件</Typography>
-                      <Typography>　対応拡張子は下記の通りです。</Typography>
-                      <Typography>　doc,gif,jpg,jpeg,pdf,png,pps</Typography>
-                      <Typography>　,ppt,pptx,txt,xls,docx,xlsx</Typography>
-                    </Grid>
-                  </Grid>
+                  </React.Fragment>
                 </Grid>
                 <Grid item xs={12}>
                   <Typography gutterBottom variant='h3'>

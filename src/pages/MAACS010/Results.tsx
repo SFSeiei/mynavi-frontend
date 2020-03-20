@@ -129,61 +129,6 @@ const Results = ({userInfo, companys, className}: Props) => {
   const handleChangePage = (data: any) => {
     setPage(data.selected)   
   }
-  const handleOperationLog = (data: any) => {
-    const rangeDate = getRangeDate(-30)
-    const operationLogValues = {
-      clientId: data.companyId, //企業ID
-      clientName: data.companyName, //企業名 
-      loginId:'', // 操作者ID
-      fullName: '',  //操作者
-      ipAddress: '',  //IPアドレス
-      usagePeriodFromYMD: rangeDate, //対象期間From（年月日）
-      usagePeriodFromH: '0', //対象期間From（時）
-      usagePeriodToYMD: '',  //対象期間To（年月日）
-      usagePeriodToH: '',  //対象期間To（時）
-      manipulationTypeMagiCompanyLogin: '0', //Magi 企業ログイン
-      manipulationTypeMagiCompanyLogout:'0',//Magi 企業ログアウト
-      manipulationTypeTermsAgree:'0', //利用規約への同意
-      manipulationTypeCoordinationComanyAccount:'0', //追加アカウント連携
-      manipulationTypeEntryUpload:'0', //エントリー情報アップロード
-      manipulationTypeEntrySearch:'0', //エントリー検索
-      manipulationTypeEntryImport:'0', //エントリ－情報取込
-      manipulationTypeEntryView:'0', //エントリー情報閲覧
-      manipulationTypeEntryUpdate:'0', //エントリー情報更新
-      manipulationTypeEntryDelete:'0', //エントリー情報添付ファイル削除
-      manipulationTypeEntryBulkCsvOutput:'0', //エントリー情報一括CSV出力
-      manipulationTypeEntryPdfOutput:'0', //エントリー情報PDF出力
-      manipulationTypeEntryBulkPdfOutput:'0', //エントリー情報一括PDF出力
-      manipulationTypeMessageSend:'0', //メッセージ送信
-      manipulationTypeBulkMessageSend:'0', //メッセージ一括送信
-      manipulationTypeFileDownload:'0', //添付ファイルダウンロード
-      manipulationTypeMessageDelete:'0', //メッセージ削除
-      manipulationTypeMessageSendApi:'0', //メッセージ送信（API）
-      manipulationTypeMessageReceiveApi:'0', //メッセージ受信（API）
-      manipulationTypeMessageCancel:'0', //予約メッセージキャンセル
-      manipulationTypeProgressUpdate:'0', //進捗更新
-      manipulationTypeBulkProgressUpdate:'0', //一括進捗更新
-      manipulationTypeInformalOfferOutput:'0', //内定通知書出力
-      manipulationTypeLoginSso:'0', //連携サイトアカウントでのログイン（シングルサインオン）
-      manipulationTypeSubmissionRequestMcb:'0', //マイキャリアボックス提出依頼
-    };
-    dispatch(setOperationLogSearchDate(operationLogValues))
-  }
-  const handleCompanyAccount = (data: any) => {
-    const companyAccountValues = {
-      clientId: data.companyId, //企業ID
-      clientName: data.companyName, //企業名 
-      fullName:'', // 操作者ID
-      accountTypeSupervising: '0',
-      accountTypeAdministrator: '0',
-      accountTypeSemiManager: '0',
-      accountTypeGeneralUser: '0',
-      accountTypeLimitUser: '0',
-      statusValid: '0',
-      statusInvalid: '0',
-    };
-    dispatch(setSearchCondition(companyAccountValues))
-  }
   const handleOperation = () => {
     const clientIdRequestData  = {
       companyId: rowData.companyId,
@@ -303,7 +248,7 @@ const Results = ({userInfo, companys, className}: Props) => {
                                                      clientName: (i as any)['companyName'],
                                                      usagePeriodFromYMD: usagePeriod,
                                                     }
-                                            }} 
+                                            }}
                                           className={classes.confirmButton} variant='contained'>
                                     操作ログ
                                   </Button>
@@ -341,8 +286,13 @@ const Results = ({userInfo, companys, className}: Props) => {
                                !permissions.some(z => permissionsList.includes(z)) && (i.managerId === null || i.managerId.toString() !== managerId)
                                 ? ''
                                 : <Button component={RouterLink}
-                                    to={'/company/companyAccount'} 
-                                    onClick={ () => handleCompanyAccount(i)} 
+                                    to={
+                                     {
+                                      pathname: routeList.companyAccount,
+                                      state:{clientId: (i as any)['companyId'], //企業ID
+                                             clientName: (i as any)['companyName'],
+                                            }
+                                    }}
                                     className={classes.confirmButton} variant='contained'>
                                     アカウント一覧
                                   </Button>

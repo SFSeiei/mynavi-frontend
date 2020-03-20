@@ -53,13 +53,15 @@ const EditorToolbar = ({ onClick, onLink }: any) => {
   return (
     <div className={classes.container}>
       {INLINE_STYLES.map(i => (
-        <Tooltip title={i.tooltip}>
-          <Button
-            className={classes.button}
-            onClick={i.command === 'link' ? onLink : onClick(i.command)}>
-            <i.icon />
-          </Button>
-        </Tooltip>
+        <React.Fragment key={i.tooltip}>
+          <Tooltip title={i.tooltip}>
+            <Button
+              className={classes.button}
+              onClick={i.command === 'link' ? onLink : onClick(i.command)}>
+              <i.icon />
+            </Button>
+          </Tooltip>
+        </React.Fragment>
       ))}
     </div>
   )
