@@ -36,17 +36,29 @@ export default yup.object().shape({
     .string()
     .max(400, validationMessageSet.maxLength)
     .test('isHalfWidth', validationMessageSet.halfWidth, (value: any) => miscRegexSet.halfWidth.test(value)),
-  // 利用開始日_from
-  startDateFrom: yup.date().nullable(),
 
+    // 利用開始日_from
+  startDateFrom: yup
+    .string()
+    .max(400, validationMessageSet.maxLength)
+    .test('isDate', validationMessageSet.date, (value: any) => miscRegexSet.date.test(value)),
   // 利用開始日_to
-  startDateTo: yup.date().nullable(),
+  startDateTo: yup
+     .string()
+     .max(400, validationMessageSet.maxLength)
+     .test('isDate', validationMessageSet.date, (value: any) => miscRegexSet.date.test(value)),
 
   // 利用終了日_from
-  endDateFrom: yup.date().nullable(),
+  endDateFrom:yup
+     .string()
+     .max(400, validationMessageSet.maxLength)
+     .test('isDate', validationMessageSet.date, (value: any) => miscRegexSet.date.test(value)),
 
   // 利用終了日_to
-  endDateTo: yup.date().nullable(),
+  endDateTo: yup
+     .string()
+     .max(400, validationMessageSet.maxLength)
+     .test('isDate', validationMessageSet.date, (value: any) => miscRegexSet.date.test(value)),
 
   // 申込種別_通常
   applicationTypeNormal: yup

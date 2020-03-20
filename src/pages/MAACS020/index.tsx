@@ -1,6 +1,4 @@
 import React, { useState } from 'react'
-import { makeStyles } from '@material-ui/core/styles'
-import { Link } from 'react-router-dom'
 import { Formik, Form, FastField,Field } from 'formik'
 import {
   Button,
@@ -12,7 +10,6 @@ import {
   Dialog,
   DialogTitle,
   DialogActions,
-  colors,
   Collapse,
 } from '@material-ui/core'
 import ArrowBackIcon from '@material-ui/icons/ArrowBack'
@@ -32,64 +29,7 @@ import { useSelector } from 'react-redux'
 import { RootState } from 'reducers'
 import { CompanySelect } from 'components'
 
-const useStyles = makeStyles(theme => ({
-  // root: {
-  //   padding: theme.spacing(3),
-  // },
-  // back: {
-  //   margin: theme.spacing(0, 0, 3),
-  // },
-  // cancel: {
-  //   color: (theme.palette as any).white,
-  //   backgroundColor: 'darkgray',
-  // },
-  // formContainer: {
-  //   justifyContent: 'flex-start',
-  //   alignItems: 'center',
-  //   paddingTop: theme.spacing(2),
-  //   paddingLeft: theme.spacing(3),
-    
-  // },
-  // formInnerContainer: {
-  //   justifyContent: 'flex-start',
-  //   alignItems: 'center',
-  //   paddingTop: theme.spacing(2),
-  // },
-  // formGroup: {
-  //   padding: theme.spacing(1),
-  //   paddingTop: theme.spacing(2),
-  //   paddingBottom: theme.spacing(2),
-  //   paddingLeft: theme.spacing(6),
-  //   paddingRight: theme.spacing(6),
-  // },
-  // buttonGroup: {
-  //   justifyContent: 'space-around',
-  // },
-  // confirmButton: {
-  //   color: (theme.palette as any).white,
-  //   backgroundColor: '#43a047',
-  //   '&:hover': {
-  //     backgroundColor: colors.green[900],
-  //   },
-  // },
-  // content: {
-  //   flexGrow: 1,
-  // },
-  // contentSectionHeader: {
-  //   display: 'flex',
-  //   justifyContent: 'space-between',
-  //   cursor: 'pointer',
-  //   backgroundColor: theme.palette.primary.main,
-  //   padding: theme.spacing(1),
-  //   color: 'white',
-  //   '& h5': {
-  //     color: 'white',
-  //   },
-  // },
-}))
-
 const CompanyCreate = () => {
-  const classes = useStyles()
   const magiClasses = magiStyles()
   const [open, setOpen] = useState(false)
   const [company,setCompany] = useState<any>(null)
@@ -303,6 +243,7 @@ const CompanyCreate = () => {
                                 </Grid>
                               </Grid>
                             </Grid>
+                            <div>
                             <FastField
                               name={'salesStaffEmployment'}
                               type={'hidden'}
@@ -313,6 +254,7 @@ const CompanyCreate = () => {
                               type={'hidden'}
                               component={ TextField }
                             />
+                            </div>
                           </React.Fragment>
                           {/* <React.Fragment key={'salesDepartmentNameEmployment'}>
                             <Label>{'営業部署名'}</Label>
@@ -417,6 +359,7 @@ const CompanyCreate = () => {
                                 </Grid>
                               </Grid>
                           </Grid>
+                          <div>
                             <FastField
                               name={'salesStaffJobChange'}
                               type={'hidden'}
@@ -427,6 +370,7 @@ const CompanyCreate = () => {
                               type={'hidden'}
                               component={ TextField }
                             />
+                            </div>
                         </React.Fragment>
                         {/* <React.Fragment key={'salesDepartmentNameJobChange'}>
                           <Label>{'営業部署名'}</Label>
@@ -531,6 +475,7 @@ const CompanyCreate = () => {
                                 </Grid>
                               </Grid>
                           </Grid>
+                          <div>
                             <FastField
                               name={'salesStaffMagi'}
                               type={'hidden'}
@@ -541,6 +486,7 @@ const CompanyCreate = () => {
                               type={'hidden'}
                               component={ TextField }
                             />
+                            </div>
                         </React.Fragment>
                       </Grid>
                     </Collapse>

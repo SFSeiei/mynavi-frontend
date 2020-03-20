@@ -10,11 +10,10 @@ export const searchRequest = (application: MAADS010QueryRequest) =>
     data: application,
   })
 //営業担当者情報を取得する
-export const searchInit = (init: initList[]) =>
+export const searchInit = () =>
   request({
     url: '/MAADS010/init',
     method: 'post',
-    data: init,
   })
 //選定した企業を登録する
 export const loginMagiClient = () =>

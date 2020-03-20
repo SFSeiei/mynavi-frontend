@@ -1,6 +1,4 @@
-import React, { useState ,useEffect } from 'react'
-import { makeStyles } from '@material-ui/core/styles'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react'
 import { Formik, Form, FastField,Field } from 'formik'
 import {
   Button,
@@ -12,80 +10,23 @@ import {
   Dialog,
   DialogTitle,
   DialogActions,
-  colors,
   Collapse,
 } from '@material-ui/core'
 import ArrowBackIcon from '@material-ui/icons/ArrowBack'
-
 import { Page, Label } from 'components'
 import { routeList } from 'routes/routes'
 import { textMap } from './formConfig'
 import history from 'utils/history'
 import { Toggle, TextField } from 'components'
 import { useDispatch, useSelector } from 'react-redux'
-import { getCompanyDetail, updateCompany, contractCheck,setContractCount} from 'reducers/companyReducer'
+import { updateCompany, contractCheck,setContractCount} from 'reducers/companyReducer'
 import ExpandLessIcon from '@material-ui/icons/ExpandLess'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import MAACS030UpdateRequestValidation from 'validations/MAACS030UpdateRequestValidation'
 import { RootState } from 'reducers';
 import magiStyles from 'css/magiStyle'
 import { CompanySelect } from 'components'
-
-const useStyles = makeStyles(theme => ({
-  // root: {
-  //   padding: theme.spacing(3),
-  // },
-  // back: {
-  //   margin: theme.spacing(0, 0, 3),
-  // },
-  // cancel: {
-  //   color: (theme.palette as any).white,
-  //   backgroundColor: 'darkgray',
-  // },
-  // formContainer: {
-  //   justifyContent: 'flex-start',
-  //   alignItems: 'center',
-  //   paddingTop: theme.spacing(2),
-  //   paddingLeft: theme.spacing(3),
-    
-  // },
-  // formInnerContainer: {
-  //   justifyContent: 'flex-start',
-  //   alignItems: 'center',
-  //   paddingTop: theme.spacing(2),
-  // },
-  // formGroup: {
-  //   padding: theme.spacing(1),
-  //   paddingTop: theme.spacing(2),
-  //   paddingBottom: theme.spacing(2),
-  //   paddingLeft: theme.spacing(6),
-  //   paddingRight: theme.spacing(6),
-  // },
-  // buttonGroup: {
-  //   justifyContent: 'space-around',
-  // },
-  // confirmButton: {
-  //   color: (theme.palette as any).white,
-  //   backgroundColor: '#43a047',
-  //   '&:hover': {
-  //     backgroundColor: colors.green[900],
-  //   },
-  // },
-  // content: {
-  //   flexGrow: 1,
-  // },
-  // contentSectionHeader: {
-  //   display: 'flex',
-  //   justifyContent: 'space-between',
-  //   cursor: 'pointer',
-  //   backgroundColor: theme.palette.primary.main,
-  //   padding: theme.spacing(1),
-  //   color: 'white',
-  //   '& h5': {
-  //     color: 'white',
-  //   },
-  // },
-}))
+import { statusRadioList } from 'pages/MAABS040/formConfig'
 
 const CompanyDetail = () => {
 
@@ -123,9 +64,6 @@ const CompanyDetail = () => {
   }
 
   const dispatch = useDispatch()
-  // useEffect(() => {
-  // dispatch(getCompanyDetail(companyId))
-  // }, [dispatch,companyId])
 
   const rawData  = useSelector((state: RootState) => state.company.companyDetailResults)
   const statusFlag = rawData.status === 1? 1 : 0
@@ -376,6 +314,7 @@ const CompanyDetail = () => {
                                 component={ CompanySelect }
                               />
                             </Grid>
+                            <div>
                             <FastField
                               name={'salesStaffEmployment'}
                               type={'hidden'}
@@ -386,17 +325,8 @@ const CompanyDetail = () => {
                               type={'hidden'}
                               component={ TextField }
                             />
+                            </div>
                           </React.Fragment>
-                          {/* <React.Fragment key={'salesDepartmentNameEmployment'}>
-                            <Label>{'営業部署名'}</Label>
-                            <Grid item xs={4} className={magiClasses.formGroupCompany}>
-                            <FastField
-                                disabled
-                                name={'salesDepartmentNameEmployment'}
-                                label={'営業部署名'}
-                                component={TextField}/>
-                            </Grid>
-                          </React.Fragment> */}
                         </Grid>
                       </Collapse>
                     </div>
@@ -459,12 +389,6 @@ const CompanyDetail = () => {
                           </React.Fragment>
                           <React.Fragment key={'managerIDJobChange'}>
                             <Label>{'営業担当者'}</Label>
-                            {/* <Grid item xs={4} className={magiClasses.formGroupCompany}>
-                            <FastField
-                                name={'salesStaffJobChange'}
-                                label={'営業担当者'}
-                                component={TextField}/>
-                            </Grid> */}
                             <Grid item xs={10} className={magiClasses.formGroupCompany}>
                               <Grid container>
                                 <Grid item xs={12}>
@@ -483,6 +407,7 @@ const CompanyDetail = () => {
                                 </Grid>
                               </Grid>
                             </Grid>
+                            <div>
                             <FastField
                               name={'salesStaffJobChange'}
                               type={'hidden'}
@@ -493,17 +418,8 @@ const CompanyDetail = () => {
                               type={'hidden'}
                               component={ TextField }
                             />
+                            </div>
                           </React.Fragment>
-                          {/* <React.Fragment key={'salesDepartmentNameJobChange'}>
-                            <Label>{'営業部署名'}</Label>
-                            <Grid item xs={4} className={magiClasses.formGroupCompany}>
-                            <FastField
-                                disabled
-                                name={'salesDepartmentNameJobChange'}
-                                label={'営業部署名'}
-                                component={TextField}/>
-                            </Grid>
-                          </React.Fragment> */}
                         </Grid>
                       </Collapse>
                     </div>
@@ -566,12 +482,6 @@ const CompanyDetail = () => {
                           </React.Fragment>
                           <React.Fragment key={'managerIDMagi'}>
                             <Label>{'営業担当者'}</Label>
-                            {/* <Grid item xs={4} className={magiClasses.formGroupCompany}>
-                            <FastField
-                                name={'salesStaffMagi'}
-                                label={'営業担当者'}
-                                component={TextField}/>
-                            </Grid> */}
                             <Grid item xs={10} className={magiClasses.formGroupCompany}>
                               <Grid container>
                                 <Grid item xs={12}>
@@ -590,6 +500,7 @@ const CompanyDetail = () => {
                                 </Grid>
                               </Grid>
                             </Grid>
+                            <div>
                             <FastField
                               name={'salesStaffMagi'}
                               type={'hidden'}
@@ -600,17 +511,8 @@ const CompanyDetail = () => {
                               type={'hidden'}
                               component={ TextField }
                             />
+                            </div>
                           </React.Fragment>
-                          {/* <React.Fragment key={'salesDepartmentNameMagi'}>
-                            <Label>{'営業部署名'}</Label>
-                            <Grid item xs={4} className={magiClasses.formGroupCompany}>
-                            <FastField
-                                disabled
-                                name={'salesDepartmentNameMagi'}
-                                label={'営業部署名'}
-                                component={TextField}/>
-                            </Grid>
-                          </React.Fragment> */}
                         </Grid>
                       </Collapse>
                     </div>
@@ -665,6 +567,7 @@ const CompanyDetail = () => {
                         label={'ステータス'}
                         multiline
                         rows="4"
+                        radiolist={statusRadioList}
                         component={Toggle}/>
                     </Grid>
                     </React.Fragment>

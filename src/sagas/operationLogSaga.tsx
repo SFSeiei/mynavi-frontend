@@ -1,4 +1,5 @@
 import { all, call, put,takeEvery, select } from 'redux-saga/effects'
+import {getOperationLogSearch} from '../selectors'
 import { openSnackbar } from 'reducers/messageReducer'
 import {
   searchOperationLogList,
@@ -8,6 +9,7 @@ import {
   setOperationLogSearchDate,
   setSuggestList,
   searchSuggestList,
+  setClientData,
 } from 'reducers/operationLogReducer';
 import {
   searchRequest,
@@ -19,8 +21,9 @@ import { magiContants } from 'utils/contants';
 
 function* searchSaga(action: ReturnType<typeof searchOperationLogList>) {
   try {
+    yield put(setOperationLog([]));
     const data = yield call(searchRequest, action.payload);
-    if(data.length == 0){
+    if(data.length === 0){
       yield put(openSnackbar(magiContants.MESSAGECODE_RESULT_NULL))
     }
     yield put(setOperationLog(data));
@@ -43,15 +46,30 @@ function* outputCsv(action: ReturnType<typeof selectOperationLog>) {
     const operationLogList: ReturnType<typeof  getOperationLogList> = yield select(
       getOperationLogList);
    const data = yield call(outputCsvRequest, operationLogList);
-   if(data == null){
+   if(data === null){
      yield put(openSnackbar(magiContants.MESSAGECODE_CSV_SUCCESS))
    }
   } catch (error) {
     yield put(openSnackbar(error.message));
   }
 }
+//初期処理企業情報を取得する
+function* searchClientIdSaga() {
+  try {
+    yield put(setOperationLog([]))
+    const search = yield select(getOperationLogSearch);
+    const data = yield call(searchRequest, search)
+    if(data.length === 0){
+      yield put(openSnackbar(magiContants.MESSAGECODE_RESULT_NULL))
+    }
+    yield put(setOperationLog(data))
+  } catch (error) {
+    yield put(openSnackbar(error.message))
+  }
+}
 export default function* operationLogSaga() {
   yield all([
+    takeEvery(setClientData, searchClientIdSaga),
     takeEvery(searchOperationLogList, searchSaga),
     takeEvery(setOperationLogSearchDate,setSearchDate),
     takeEvery(searchSuggestList,initSaga),

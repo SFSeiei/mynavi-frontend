@@ -40,14 +40,16 @@ const useStyles = makeStyles(theme => ({
 interface Props {
   className: string
   onOpenNavBarMobile: () => void
+  managerId: string
 }
 
-const TopBar = ({ className, onOpenNavBarMobile }: Props) => {
+const TopBar = ({ className, onOpenNavBarMobile,managerId }: Props) => {
   const classes = useStyles()
 
   const dispatch = useDispatch()
-  const handleSignout = () => dispatch(signout())
-
+  const handleSignout = () => {
+   dispatch(signout(managerId))
+  }
   return (
     <AppBar className={clsx(classes.root, className)} color='primary'>
       <Toolbar>

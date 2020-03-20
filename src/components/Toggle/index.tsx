@@ -23,14 +23,15 @@ const useStyles = makeStyles({
 })
 
 interface Props extends FieldProps {
+  disabled?: boolean
   label: string
-  radioList: {
+  radiolist: {
     label: string
     value: string
   }[]
 }
 
-const Toggle = ({ field, form, label, radioList, ...others }: Props) => {
+const Toggle = ({ field, form, label,  disabled, radiolist, ...others }: Props) => {
   const classes = useStyles()
   const { name, value } = field
   const { errors, touched } = form
@@ -41,13 +42,14 @@ const Toggle = ({ field, form, label, radioList, ...others }: Props) => {
   return (
     <FormControl error={Boolean(errors[name] && touched[name])}>
       <RadioGroup row value={value} onChange={handleChange} {...others}>
-        {radioList.map(i => (
+        {radiolist.map(i => (
           <FormControlLabel
             control={<Radio />}
             label={i.label}
             color='primary'
             value={i.value}
             key={i.value} 
+            disabled={disabled}
           />
         ))}
       </RadioGroup>

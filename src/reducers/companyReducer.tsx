@@ -23,7 +23,7 @@ export interface CompanyList {
   statusName: string; //ステータスName
   accountIssuanceStatement: string; //アカウント発行状況
   accountIssuanceStatementName: string; //アカウント発行状況Name
-  managerId: string; //管理者ID
+  managerId: number; //管理者ID
   mailAddress: string; //メールアドレス
   companyAccountId: string; //企業アカウントID
   companyContractMediaId: string; //企業契約媒体ID

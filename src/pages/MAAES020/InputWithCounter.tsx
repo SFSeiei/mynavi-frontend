@@ -1,20 +1,7 @@
 import React from 'react'
 import { Typography } from '@material-ui/core'
 import { FieldProps } from 'formik'
-import { makeStyles } from '@material-ui/core/styles'
-import TextField from './TextField'
-
-const useStyles = makeStyles(theme => ({
-  textField: {
-    width: '100%',
-    minWidth: 200,
-  },
-  textCounter: {
-    float: 'right',
-    minWidth: 120,
-    textAlign: 'right',
-  },
-}))
+import { TextField } from 'components'
 
 interface Props extends FieldProps {
   name?: string
@@ -35,7 +22,6 @@ const InputWithCounter = ({
   maxAmount,
   ...others
 }: Props) => {
-  const classes = useStyles()
   const { name, value } = field
   const handleChange = (event: any) => {
     if (maxAmount && maxAmount >= event.target.value.length) {
@@ -55,8 +41,6 @@ const InputWithCounter = ({
               ? value.substr(0, maxAmount)
               : value,
         }}
-        label={label}
-        className={classes.textField}
       />
       <Typography align='right' gutterBottom variant='h5'>
         {`入力 ${

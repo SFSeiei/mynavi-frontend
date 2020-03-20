@@ -110,3 +110,21 @@ export const convertToAccountDto = (data: any) => ({
 })
 
 export const backToAccountPage = () => history.push(routeList.account)
+export const convertDateString = (input: string) =>
+  isNaN(Date.parse(input))
+    ? ''
+    : new Intl.DateTimeFormat('ja-JP').format(new Date(input))
+
+/**
+ * Input String Format: YYYY/MM/DD
+ */
+export const convertStringToDateArgs = (input: string) => {
+  const [year, month, day] = input
+    .split('/')
+    .map(i => parseInt(i))
+    .map((item, index) => (index === 1 ? item - 1 : item)) // Month is zero-indexed
+
+  return [year, month, day] as const
+}
+
+export const convertStringForIe = (input: string) => input.split('/').join('-')

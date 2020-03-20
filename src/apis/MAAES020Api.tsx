@@ -9,9 +9,21 @@ export const initialCreateRequest = (
     method: 'post',
   })
 
-export const createNotificationRequest = (apiData: MAAES020CreateRequest) =>
-  request({
+export const createNotificationRequest = (apiData: MAAES020CreateRequest) => {
+
+  const data = new FormData()
+  data.append('createRequest',encodeURI(JSON.stringify(apiData)))
+  apiData.fileSelected.map(i => (
+    data.append('fileSelected', i)
+  ))
+
+  return request({
     url: '/MAAES020/resister',
     method: 'post',
-    data: apiData,
+    data: data,
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
   })
+}
+

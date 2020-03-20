@@ -8,7 +8,8 @@ export const fieldList = [
   },
 ]
 export const initialValues = {
-  oldPassword: '',
+  currentPassword: '',
   newPassword: '',
   newPasswordConfirm: '',
+  sysVersion: '',
 }

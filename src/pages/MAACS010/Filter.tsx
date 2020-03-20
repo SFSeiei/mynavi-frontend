@@ -90,21 +90,23 @@ const Filter = () => {
                   />
                 </Grid>
                 </React.Fragment> 
-                <React.Fragment key='adminId'>
+                <React.Fragment key='salesStaffName'>
                 <Label>営業担当者</Label>
                 <Grid item xs={10} className={classes.formGroup}>
                 <Field
-                    name={'adminId'}
+                    name={'salesStaffName'}
                     label={'営業担当者'}
                     options = {option}
                     component={ IntegrationReactSelect }
                   />
                 </Grid>
+                <div>
                 <FastField
-                    name={'salesStaffName'}
+                    name={'adminId'}
                     type={'hidden'}
                     component={ TextField }
                   />
+                </div>
                 </React.Fragment> 
                 <React.Fragment key='mailAddressClient'>
                 <Label>メールアドレス（企業）</Label>

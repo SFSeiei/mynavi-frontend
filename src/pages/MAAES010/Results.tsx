@@ -110,69 +110,69 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center',
     borderRadius: '12px',
     backgroundColor: '#cef0ac',
-    display:'inline-flex',
+    display: 'inline-flex',
     fiexBasis: '150px',
     justifyContent: 'center',
     margin: '8px',
     width: '150px',
     fontColor: 'inherit',
     fontFamily: 'inherit',
-    fontSize:'inherit',
-    fontStyle:'inherit',
-    fontVariant:'inherit',
-    fontWeight:'inherit',
-    lineHeight:'inherit',
+    fontSize: 'inherit',
+    fontStyle: 'inherit',
+    fontVariant: 'inherit',
+    fontWeight: 'inherit',
+    lineHeight: 'inherit',
   },
   categoryBlue: {
     alignItems: 'center',
     borderRadius: '12px',
     backgroundColor: '#b6d3f0',
-    display:'inline-flex',
+    display: 'inline-flex',
     fiexBasis: '150px',
     justifyContent: 'center',
     margin: '8px',
     width: '150px',
     fontColor: 'inherit',
     fontFamily: 'inherit',
-    fontSize:'inherit',
-    fontStyle:'inherit',
-    fontVariant:'inherit',
-    fontWeight:'inherit',
-    lineHeight:'inherit',
+    fontSize: 'inherit',
+    fontStyle: 'inherit',
+    fontVariant: 'inherit',
+    fontWeight: 'inherit',
+    lineHeight: 'inherit',
   },
   categoryRed: {
     alignItems: 'center',
     borderRadius: '12px',
     backgroundColor: '#f5c4dc',
-    display:'inline-flex',
+    display: 'inline-flex',
     fiexBasis: '150px',
     justifyContent: 'center',
     margin: '8px',
     width: '150px',
     fontColor: 'inherit',
     fontFamily: 'inherit',
-    fontSize:'inherit',
-    fontStyle:'inherit',
-    fontVariant:'inherit',
-    fontWeight:'inherit',
-    lineHeight:'inherit',
+    fontSize: 'inherit',
+    fontStyle: 'inherit',
+    fontVariant: 'inherit',
+    fontWeight: 'inherit',
+    lineHeight: 'inherit',
   },
   categoryYellow: {
     alignItems: 'center',
     borderRadius: '12px',
     backgroundColor: '#dbc4f5',
-    display:'inline-flex',
+    display: 'inline-flex',
     fiexBasis: '150px',
     justifyContent: 'center',
     margin: '8px',
     width: '150px',
     fontColor: 'inherit',
     fontFamily: 'inherit',
-    fontSize:'inherit',
-    fontStyle:'inherit',
-    fontVariant:'inherit',
-    fontWeight:'inherit',
-    lineHeight:'inherit',
+    fontSize: 'inherit',
+    fontStyle: 'inherit',
+    fontVariant: 'inherit',
+    fontWeight: 'inherit',
+    lineHeight: 'inherit',
   },
 }))
 
@@ -209,6 +209,7 @@ const Results = ({ notifications, className }: Props) => {
   const inputLabel = React.useRef<HTMLLabelElement>(null)
   const [labelWidth, setLabelWidth] = React.useState(0)
   React.useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     setLabelWidth(inputLabel.current!.offsetWidth)
   }, [])
 
@@ -284,7 +285,7 @@ const Results = ({ notifications, className }: Props) => {
 
   const handleRequestSort = (_event: any, property: string) => {
     const isDesc = orderBy === property && order === magiContants.DESC
-    setOrder(isDesc ? 'asc': 'desc')
+    setOrder(isDesc ? 'asc' : 'desc')
     setOrderBy(property)
   }
 
@@ -326,13 +327,15 @@ const Results = ({ notifications, className }: Props) => {
             notifications.length
           } 件中 ${startIndex + 1}-${endIndex} 件表示`}</Typography>
           <Paginate
-            pageCount={Math.ceil(notifications.length / magiContants.ROWSPER_PAGE)}
+            pageCount={Math.ceil(
+              notifications.length / magiContants.ROWSPER_PAGE
+            )}
             forcePage={page}
             onPageChange={handleChangePage}
           />
         </CardActions>
         <CardContent className={classes.content}>
-          <PerfectScrollbar style={{ position: 'relative', height: 600 }}>
+          <PerfectScrollbar>
             <div className={classes.inner}>
               <Table style={{ tableLayout: 'fixed' }} stickyHeader>
                 <EnhancedTableHead
@@ -350,7 +353,11 @@ const Results = ({ notifications, className }: Props) => {
                     })),
                     getSorting(order, orderBy)
                   )
-                    .slice(page * magiContants.ROWSPER_PAGE, page * magiContants.ROWSPER_PAGE + magiContants.ROWSPER_PAGE)
+                    .slice(
+                      page * magiContants.ROWSPER_PAGE,
+                      page * magiContants.ROWSPER_PAGE +
+                        magiContants.ROWSPER_PAGE
+                    )
                     .map(i => (
                       <TableRow
                         className={
@@ -380,6 +387,7 @@ const Results = ({ notifications, className }: Props) => {
                           c.id === 'listSubject' ? (
                             <TableCell key={c.id} align='center'>
                               <Link
+                                style={{textOverflow: 'ellipsis', overflow: 'hidden'}}
                                 to={{
                                   pathname: routeList.notificationDetail,
                                   state: { notiInfo: { newsId: i.listNewsId } },
@@ -437,7 +445,9 @@ const Results = ({ notifications, className }: Props) => {
         </CardContent>
         <CardActions className={classes.singleAction}>
           <Paginate
-            pageCount={Math.ceil(notifications.length / magiContants.ROWSPER_PAGE)}
+            pageCount={Math.ceil(
+              notifications.length / magiContants.ROWSPER_PAGE
+            )}
             onPageChange={handleChangePage}
             forcePage={page}
           />

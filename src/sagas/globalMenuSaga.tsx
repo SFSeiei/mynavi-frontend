@@ -1,4 +1,4 @@
-import { all, call, put, takeLatest } from 'redux-saga/effects'
+import { all, call, put, takeLatest, takeEvery } from 'redux-saga/effects'
 import {
   signout,
   signoutSuccess,
@@ -12,9 +12,9 @@ import {
 } from 'apis/MAAGS010Api'
 
 
-function* signoutSaga() {
+function* signoutSaga(action: ReturnType<typeof signout>) {
   try {
-    yield call(logoutRequest)
+    yield call(logoutRequest, action.payload)
     yield put(signoutSuccess())
   } catch (error) {
     yield put(openSnackbar(error))
@@ -33,7 +33,7 @@ function* infoSaga() {
 
 export default function* userSaga() {
   yield all([
-    takeLatest(signout, signoutSaga),
+    takeEvery(signout, signoutSaga),
     takeLatest(getUserInfo, infoSaga)
   ])
 }

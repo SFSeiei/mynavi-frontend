@@ -28,7 +28,7 @@ export  default interface MAABS040UpdateRequest {
 
   // 無効ユーザを含む
   status: number;
-
+  
   // 権限_システム管理
   authoritySystem: string;
 
@@ -46,9 +46,14 @@ export  default interface MAABS040UpdateRequest {
 
   // 権限_営業
   authoritySales: string;  
-
   // バージョン
-  sysVersionNumberAdmin: number;   
-
+  sysVersionNumberAdmin: number;
+  statusOld: string;  //システム管理フラグチェック用
+  authSystemFlagOld: string;  //システム管理フラグチェック用
+  authAccountFlagOld: string;  //アカウント管理フラグチェック用
+  authannounceForCompanyFlagOld: string; //企業向けアナウンスフラグチェック用
+  authCompanyFlagOld: string;  //企業管理フラグチェック用
+  authSupportFlagOld: string;  //企業サポートフラグチェック用
+  authSalesFlagOld: string;  //営業フラグチェック用
   permissions: Permission[] //権限
 }

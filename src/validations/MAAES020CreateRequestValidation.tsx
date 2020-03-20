@@ -3,7 +3,6 @@
  */
 
 import * as yup from 'yup'
-import { number } from '@lingui/macro'
 import { validationMessageSet } from 'utils/contants'
 import { miscRegexSet } from 'utils/regex'
 
@@ -60,38 +59,25 @@ export default yup.object().shape({
   // 公開開始日
   // -
   publicStartDate: yup
-    .date()
-    .required('必須')
-    .test(
-      'publicStartDate',
-      '公開開始日は、公開終了日を超えてはならない',
-      function(value: any) {
-        const endDateStr = this.parent.publicEndDate
-        if (endDateStr) {
-          const endDate = new Date(this.parent.publicEndDate)
-          const startDate = new Date(value)
-          return startDate <= endDate
-        } else {
-          return true
-        }
-      }
+    .string()
+    .required(validationMessageSet.required)
+    .max(10, validationMessageSet.maxLength)
+    .test('isDate', validationMessageSet.date, (value: any) =>
+      miscRegexSet.date.test(value)
     ),
+
   // 公開終了日
   // -
-  publicEndDate: yup.date().nullable(),
+  publicEndDate: yup
+    .string()
+    .max(10, validationMessageSet.maxLength)
+    .test('isDate', validationMessageSet.date, (value: any) =>
+      miscRegexSet.date.test(value)
+    ),
 
   // 添付ファイル
   // -
   fileSelected: yup
-    // .array().of(yup.mixed().test(
-    //   'ファイル拡張子',
-    // '非対応のファイルが含まれています。',
-    // // '添付ファイル拡張子: doc,gif,jpg,jpeg,pdf,png,pps,ppt,pptx,txt,xls,docx,xlsx',
-    // (file: File) => {
-    //     let fileType = file.name.split('.')[file.name.split('.').length - 1]
-    //     debugger
-    //     return 'doc,gif,jpg,jpeg,pdf,png,pps,ppt,pptx,txt,xls,docx,xlsx'.includes(fileType)
-    //   }))
     .mixed()
     // .test(
     //   'sizeLimt',
@@ -103,27 +89,5 @@ export default yup.object().shape({
     //   '添付ファイルサイズ上限: 10MB/件',
     //   (fileList: File[]) =>
     //     fileList.every((file: File) => file.size <= 1024 * 1024 * 10)
-    // ),
-    // .test(
-    //   'fileSelected',
-    //   '非対応のファイルが含まれています。',
-    //   // '添付ファイル拡張子: doc,gif,jpg,jpeg,pdf,png,pps,ppt,pptx,txt,xls,docx,xlsx',
-    //   (fileList: File[]) => {
-    //     const result = fileList.every((file: File) => {
-    //       const fileType = file.name.split('.')[file.name.split('.').length - 1]
-    //       return 'doc,gif,jpg,jpeg,pdf,png,pps,ppt,pptx,txt,xls,docx,xlsx'.includes(
-    //         fileType
-    //       )
-    //     })
-    //     return result
-    //   }
-    // )
-    // .test(
-    //   'ファイル数上限',
-    //   'ファイル数の上限が超えました。',
-    //   // '添付ファイル数上限: 10',
-    //   (fileList: File[]) => {
-    //     return fileList && fileList.length <= 10
-    //   }
     // ),
 })

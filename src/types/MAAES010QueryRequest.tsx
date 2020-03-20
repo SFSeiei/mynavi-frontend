@@ -11,6 +11,9 @@ export interface MAAES010QueryRequest {
 
   // 公開開始日_from
   publicStartDateFrom: string;
+  
+  // 公開開始日_to
+  publicStartDateTo: string;
 
   // 障害報告
   categoryFaultReport: string;

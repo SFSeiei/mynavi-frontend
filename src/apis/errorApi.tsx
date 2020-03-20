@@ -3,7 +3,7 @@ import { getErrorFromStorage } from 'utils/error';
 
 export const sendRequest = (error: ReturnType<typeof getErrorFromStorage>) =>
   request({
-    url: '/admin/errorlog',
+    url: '/auth/errorlog',
     method: 'post',
     data: error,
   });

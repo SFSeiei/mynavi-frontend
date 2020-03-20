@@ -17,8 +17,10 @@ export interface ApplicationList {
   startDateTo: string //利用開始日_to
   endDateFrom: string //利用終了日_from
   endDateTo: string //利用終了日_to
-  applicationTypes: string[] //申込種別
-  status: string[] //ステータス
+  contractType: string //申込種別
+  contractTypeName: string //申込種別名称
+  status: string //ステータス
+  statusName: string //ステータス名称
   fefaultMessage: string //fefaultMessage
   field: string //field
 }
@@ -35,8 +37,6 @@ export interface AppSearch {
   startDateTo: string //利用開始日_to
   endDateFrom: string //利用終了日_from
   endDateTo: string //利用終了日_to
-  // applicationTypes: string[] //申込種別
-  // status: string[] //ステータス
   applicationTypeNormal: string //申込種別_通常
   applicationTypeEmploymentNaviPre: string //申込種別_就職ナビ(プレ)
   applicationTypeEmploymentNaviMain: string //申込種別_就職ナビ(本サイト)
@@ -81,10 +81,7 @@ export interface initList {
   fullName: string //氏名
   departmentName: string //部署名
 }
-// export interface CheckMessage {
-//   message: string;
-//   code: string;
-// }
+
 //検索条件と検索結果のinterface
 export interface Application {
   dateList: ApplicationList[]
@@ -104,13 +101,13 @@ const applicationSlice = createSlice({
   slice: 'application',
   initialState,
   reducers: {
+    initialApplication(state) {
+      return state;
+    },
     applicationInitialize(state, title) {
       return state
     },
-    searchApplicationList(
-      state,
-      action: PayloadAction<MAADS010QueryRequest>
-    ) {
+    searchApplicationList(state,action: PayloadAction<MAADS010QueryRequest>) {
       return state
     },
     setApplication(state, action: PayloadAction<ApplicationList[]>) {
@@ -124,15 +121,9 @@ const applicationSlice = createSlice({
       state.searchDate = action.payload
       return state
     },
-    iinitList(state, managerId) {
-      return state
-    },
-    setInitList(state, action: PayloadAction<initList[]>) {
-      state.initDateList = action.payload
-      return state
-    },
     setClientId(state, action: PayloadAction<string>) {
       state.searchDate.clientId = action.payload
+      state.searchDate.charge = '0'
       return state
     },
     loginMagiClientId(state) {
@@ -149,13 +140,12 @@ const applicationSlice = createSlice({
 })
 
 export const {
+  initialApplication,
   applicationInitialize,
   searchApplicationList,
   setApplication,
   setAppSearchList,
   setAppSearch,
-  iinitList,
-  setInitList,
   setClientId,
   loginMagiClientId,
   getApplicationDetail,

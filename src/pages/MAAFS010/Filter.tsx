@@ -5,7 +5,7 @@ import ExpandLessIcon from '@material-ui/icons/ExpandLess'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import SearchIcon from '@material-ui/icons/SearchOutlined'
 import { useDispatch, useSelector } from 'react-redux'
-import { Formik, Form, FastField} from 'formik'
+import { Formik, Form, FastField, Field } from 'formik'
 import { initialValues, hourList } from './formConfig'
 import { TextField, Label,Checkbox, DatePicker,LabelShort,LabelUp } from 'components'
 import { searchOperationLogList,setOperationLogSearchDate } from 'reducers/operationLogReducer'
@@ -13,39 +13,9 @@ import {Selects } from 'components/Selects'
 import validationSchema from 'validations/MAAFS010QueryRequestValidation'
 import { RootState } from 'reducers'
 import magiStyles from 'css/magiStyle'
-import {IntegrationReactSelect} from '../MAADS010/Select'
-import { iinitList } from 'reducers/applicationReducer'
+import {IntegrationReactSelect} from '../MAAFS010/Select'
 
 const useStyles = makeStyles(theme => ({
-  // root: {
-  //   height: '100%',
-  //   display: 'flex',
-  //   flexDirection: 'column',
-  //   backgroundColor: '#deecf2',
-  // },
-  // select: {
-  //   marginBottom: theme.spacing(4),
-  // },
-  // selectInput: {
-  //   marginTop: theme.spacing(2),
-  // },
-  // buttonIcon: {
-  //   marginRight: theme.spacing(1),
-  // },
-  // content: {
-  //   flexGrow: 1,
-  // },
-  // contentSectionHeader: {
-  //   display: 'flex',
-  //   justifyContent: 'space-between',
-  //   cursor: 'pointer',
-  //   backgroundColor: theme.palette.primary.main,
-  //   padding: theme.spacing(1),
-  //   color: 'white',
-  //   '& h5': {
-  //     color: 'white',
-  //   },
-  // },
   formContainer: {
     justifyContent: 'flex-start',
     paddingLeft: theme.spacing(3),
@@ -55,28 +25,16 @@ const useStyles = makeStyles(theme => ({
     paddingLeft: theme.spacing(8),
     padding: theme.spacing(1),
   },
-  // action: {
-  //   margin: theme.spacing(1, 0, 3),
-  // },
+  formGroupCheck: {
+    paddingLeft: theme.spacing(8),
+    padding: theme.spacing(4),
+  },
   formGroupDate: {
     alignSelf: 'center',
     display: 'flex',
     paddingLeft: theme.spacing(4.5),
     padding: theme.spacing(1),
   },
-
-  // hours: {
-  //   alignSelf: 'center',
-  //   display: 'flex',
-  //   paddingLeft: theme.spacing(0.01),
-  //   padding: theme.spacing(1),
-  // },
-  // formControl: {
-  //   padding: theme.spacing(1),
-  // },
-  // selectGroup: {
-  //   height: '38px',
-  // },
   dateContainer:{
     width:'100%',
     padding: theme.spacing(1),
@@ -84,6 +42,9 @@ const useStyles = makeStyles(theme => ({
     marginRight: theme.spacing(-1),
     marginLeft: theme.spacing(-1),
     marginBottom:theme.spacing(-4),
+  },
+  datelableDiv:{
+    display:'none'
   },
   datelable:{
     paddingLeft: '25px',
@@ -94,7 +55,7 @@ const useStyles = makeStyles(theme => ({
     paddingLeft: '8px',
     width:'5%',
     display: 'inline-block',
-    position :'relative' ,top:'-7px',
+    position :'relative' ,top:'4px',
   },
   datetimeSpan:{
     paddingLeft: '20px',
@@ -105,14 +66,14 @@ const useStyles = makeStyles(theme => ({
   datetextFrom:{
     width:'25%',
     display: 'inline-block',
-    paddingLeft: '70px',
-    position :'relative' ,top:'-16px',
+    paddingLeft: '63px',
+    position :'relative' ,top:'1px',
   },
   datetextTo:{
     width:'19%',
     display: 'inline-block',
     paddingLeft: '26px',
-    position :'relative' ,top:'-16px',
+    position :'relative' ,top:'3px',
   },
   dateline:{
     marginTop: '33px',
@@ -121,6 +82,13 @@ const useStyles = makeStyles(theme => ({
     width:'1%',
     display: 'inline-block',
   },
+  overflowCheck:{
+    display: 'inline-block',
+    textOverflow: 'ellipsis',
+    wordWrap: 'break-word',
+    wordBreak: 'break-all',
+    whiteSpace:'normal',
+  },
 }))
 
 const Filter = () => {
@@ -128,7 +96,6 @@ const Filter = () => {
   const magiClasses = magiStyles() 
   const [expandProject, setExpandProject] = useState(true)
   const dispatch = useDispatch()
-  // dispatch(iinitList())
   
   const handleSubmit = (values: any) => {
     dispatch(searchOperationLogList(values))
@@ -142,12 +109,11 @@ const Filter = () => {
   // 検索条件を取得する
   const operationLogPrim = useSelector((state: RootState) => state.operationLog.operationLogPrim)
 　// 検索条件を取得する
-  const [initialValue, setinitialValue] = useState(Object.keys(operationLogPrim).length !== 0 ? operationLogPrim : initialValues)
   const option = useSelector((state: RootState) => state.operationLog.suggestList)
   return (
     <Card>
       <Formik
-        initialValues={initialValue}
+        initialValues={operationLogPrim}
         validationSchema={validationSchema}
         validate={values => {
           const errors = {
@@ -160,9 +126,9 @@ const Filter = () => {
               return errors;
             }
           }
-
         }
       }
+        enableReinitialize
         onSubmit={handleSubmit}>
         <Form className={magiClasses.rootList}>
           <div className={magiClasses.content}>
@@ -203,18 +169,20 @@ const Filter = () => {
                 <React.Fragment key='fullName'>
                   <Label>操作者</Label>
                   <Grid item xs={9} sm={3} className={classes.formGroup}>
-                    <FastField
+                    <Field
                       name={'fullName'}
                       label={'操作者'}
                       options = {option}
                       component={ IntegrationReactSelect }
                     />
+                  </Grid>
+                  <div className={classes.datelableDiv}>
                     <FastField
                       name={'loginId'}
                       type={'hidden'}
                       component={ TextField }
-                  />
-                  </Grid>
+                    />
+                  </div>
                 </React.Fragment>
                 <Grid item xs={9} sm={6} >
                 </Grid>
@@ -242,7 +210,6 @@ const Filter = () => {
                     <FastField
                       name={'usagePeriodFromYMD'}
                       label={'対象期間From（年月日）'}
-                      // type={'date'}
                       component={DatePicker}
                     />
                    </div>
@@ -266,7 +233,6 @@ const Filter = () => {
                     <FastField
                       name={'usagePeriodToYMD'}
                       label={'対象期間To（年月日）'}
-                      // type={'date'}
                       component={DatePicker}
                     />
                   </div>
@@ -291,9 +257,9 @@ const Filter = () => {
                 justify='space-around'
                 className={classes.formContainer}>
                 <LabelUp>操作種別</LabelUp>
-                <Grid item xs={9} className={classes.formGroup}>
+                <Grid item xs={9} className={classes.formGroupCheck}>
                   <Grid container>
-                    <Grid item xs={3}>
+                    <Grid item xs={3} className={classes.overflowCheck}>
                     <React.Fragment key='manipulationTypeMagiCompanyLogin'>
                       <FastField
                         name={'manipulationTypeMagiCompanyLogin'}
@@ -302,7 +268,7 @@ const Filter = () => {
                       />
                     </React.Fragment>
                     </Grid>
-                    <Grid item xs={3}>
+                    <Grid item xs={3} className={classes.overflowCheck}>
                     <React.Fragment key='manipulationTypeMagiCompanyLogout'>
                       <FastField
                         name={'manipulationTypeMagiCompanyLogout'}
@@ -311,7 +277,7 @@ const Filter = () => {
                       />
                     </React.Fragment>
                     </Grid>
-                    <Grid item xs={3}>
+                    <Grid item xs={3} className={classes.overflowCheck}>
                     <React.Fragment key='manipulationTypeTermsAgree'>
                       <FastField
                         name={'manipulationTypeTermsAgree'}
@@ -320,7 +286,7 @@ const Filter = () => {
                       />
                     </React.Fragment>
                     </Grid>
-                    <Grid item xs={3}>
+                    <Grid item xs={3} className={classes.overflowCheck}>
                     <React.Fragment key='manipulationTypeCoordinationComanyAccount'>
                       <FastField
                         name={'manipulationTypeCoordinationComanyAccount'}
@@ -331,7 +297,7 @@ const Filter = () => {
                     </Grid>
                     </Grid>
                     <Grid container>
-                      <Grid item xs={3}>
+                    <Grid item xs={3} className={classes.overflowCheck}>
                     <React.Fragment key='manipulationTypeEntryUpload'>
                       <FastField
                         name={'manipulationTypeEntryUpload'}
@@ -349,7 +315,7 @@ const Filter = () => {
                       />
                     </React.Fragment>
                     </Grid>
-                    <Grid item xs={3}>
+                    <Grid item xs={3} className={classes.overflowCheck}>
                     <React.Fragment key='manipulationTypeEntryImport'>
                       <FastField
                         name={'manipulationTypeEntryImport'}
@@ -358,7 +324,7 @@ const Filter = () => {
                       />
                     </React.Fragment>
                     </Grid>
-                    <Grid item xs={3}>
+                    <Grid item xs={3} className={classes.overflowCheck}>
                     <React.Fragment key='manipulationTypeEntryView'>
                       <FastField
                         name={'manipulationTypeEntryView'}
@@ -369,7 +335,7 @@ const Filter = () => {
                     </Grid>
                     </Grid>
                     <Grid container>
-                      <Grid item xs={3}>
+                    <Grid item xs={3} className={classes.overflowCheck}>
                     <React.Fragment key='manipulationTypeEntryUpdate'>
                       <FastField
                         name={'manipulationTypeEntryUpdate'}
@@ -378,7 +344,7 @@ const Filter = () => {
                       />
                     </React.Fragment>
                     </Grid>
-                    <Grid item xs={3}>
+                    <Grid item xs={3} className={classes.overflowCheck}>
                     <React.Fragment key='manipulationTypeEntryDelete'>
                       <FastField
                         name={'manipulationTypeEntryDelete'}
@@ -387,7 +353,7 @@ const Filter = () => {
                       />
                     </React.Fragment>
                     </Grid>
-                    <Grid item xs={3}>
+                    <Grid item xs={3} className={classes.overflowCheck}>
                     <React.Fragment key='manipulationTypeEntryBulkCsvOutput'>
                       <FastField
                         name={'manipulationTypeEntryBulkCsvOutput'}
@@ -396,7 +362,7 @@ const Filter = () => {
                       />
                     </React.Fragment>
                     </Grid>
-                    <Grid item xs={3}>
+                    <Grid item xs={3} className={classes.overflowCheck}>
                     <React.Fragment key='manipulationTypeEntryPdfOutput'>
                       <FastField
                         name={'manipulationTypeEntryPdfOutput'}
@@ -407,7 +373,7 @@ const Filter = () => {
                     </Grid>
                   </Grid>
                   <Grid container>
-                    <Grid item xs={3}>
+                  <Grid item xs={3} className={classes.overflowCheck}>
                     <React.Fragment key='manipulationTypeEntryBulkPdfOutput'>
                       <FastField
                         name={'manipulationTypeEntryBulkPdfOutput'}
@@ -416,7 +382,7 @@ const Filter = () => {
                       />
                     </React.Fragment>
                     </Grid>
-                    <Grid item xs={3}>
+                    <Grid item xs={3} className={classes.overflowCheck}>
                     <React.Fragment key='manipulationTypeMessageSend'>
                       <FastField
                         name={'manipulationTypeMessageSend'}
@@ -425,7 +391,7 @@ const Filter = () => {
                       />
                     </React.Fragment>
                     </Grid>
-                    <Grid item xs={3}>
+                    <Grid item xs={3} className={classes.overflowCheck}>
                     <React.Fragment key='manipulationTypeBulkMessageSend'>
                       <FastField
                         name={'manipulationTypeBulkMessageSend'}
@@ -434,7 +400,7 @@ const Filter = () => {
                       />
                     </React.Fragment>
                     </Grid>
-                    <Grid item xs={3}>
+                    <Grid item xs={3} className={classes.overflowCheck}>
                     <React.Fragment key='manipulationTypeFileDownload'>
                       <FastField
                         name={'manipulationTypeFileDownload'}
@@ -445,7 +411,7 @@ const Filter = () => {
                     </Grid>
                   </Grid>
                   <Grid container>
-                    <Grid item xs={3}>
+                  <Grid item xs={3} className={classes.overflowCheck}>
                     <React.Fragment key='manipulationTypeMessageDelete'>
                       <FastField
                         name={'manipulationTypeMessageDelete'}
@@ -454,7 +420,7 @@ const Filter = () => {
                       />
                     </React.Fragment>
                     </Grid>
-                    <Grid item xs={3}>
+                    <Grid item xs={3} className={classes.overflowCheck}>
                     <React.Fragment key='manipulationTypeMessageSendApi'>
                       <FastField
                         name={'manipulationTypeMessageSendApi'}
@@ -463,7 +429,7 @@ const Filter = () => {
                       />
                     </React.Fragment>
                     </Grid>
-                    <Grid item xs={3}>
+                    <Grid item xs={3} className={classes.overflowCheck}>
                     <React.Fragment key='manipulationTypeMessageReceiveApi'>
                       <FastField
                         name={'manipulationTypeMessageReceiveApi'}
@@ -472,7 +438,7 @@ const Filter = () => {
                       />
                     </React.Fragment>
                     </Grid>
-                    <Grid item xs={3}>
+                    <Grid item xs={3} className={classes.overflowCheck}>
                     <React.Fragment key='manipulationTypeMessageCancel'>
                       <FastField
                         name={'manipulationTypeMessageCancel'}
@@ -483,7 +449,7 @@ const Filter = () => {
                     </Grid>
                   </Grid>
                   <Grid container>
-                    <Grid item xs={3}>
+                  <Grid item xs={3} className={classes.overflowCheck}>
                     <React.Fragment key='manipulationTypeProgressUpdate'>
                       <FastField
                         name={'manipulationTypeProgressUpdate'}
@@ -492,7 +458,7 @@ const Filter = () => {
                       />
                     </React.Fragment>
                     </Grid>
-                    <Grid item xs={3}>
+                    <Grid item xs={3} className={classes.overflowCheck}>
                     <React.Fragment key='manipulationTypeBulkProgressUpdate'>
                       <FastField
                         name={'manipulationTypeBulkProgressUpdate'}
@@ -501,7 +467,7 @@ const Filter = () => {
                       />
                     </React.Fragment>
                     </Grid>
-                    <Grid item xs={3}>
+                    <Grid item xs={3} className={classes.overflowCheck}>
                     <React.Fragment key='manipulationTypeInformalOfferOutput'>
                       <FastField
                         name={'manipulationTypeInformalOfferOutput'}
@@ -510,7 +476,7 @@ const Filter = () => {
                       />
                     </React.Fragment>
                     </Grid>
-                    <Grid item xs={3}>
+                    <Grid item xs={3} className={classes.overflowCheck}>
                     <React.Fragment key='manipulationTypeLoginSso'>
                       <FastField
                         name={'manipulationTypeLoginSso'}
@@ -521,7 +487,7 @@ const Filter = () => {
                     </Grid>
                   </Grid>
                   <Grid container>
-                    <Grid item xs={3}>
+                  <Grid item xs={3} className={classes.overflowCheck}>
                     <React.Fragment key='manipulationTypeSubmissionRequestMcb'>
                       <FastField
                         name={'manipulationTypeSubmissionRequestMcb'}

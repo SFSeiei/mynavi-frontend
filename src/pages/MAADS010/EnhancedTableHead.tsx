@@ -5,8 +5,6 @@ import {
   TableRow,
   TableSortLabel,
 } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
-
 import { Order } from 'utils/misc'
 import magiStyles from 'css/magiStyle'
 
@@ -16,22 +14,11 @@ export const headCells = [
   { id: 'companyId', label: '企業ID' },
   { id: 'companyName', label: '企業名' },
   { id: 'usagePeriod', label: '利用期間' },
-  { id: 'contractType', label: '申込種別' },
+  { id: 'contractTypeName', label: '申込種別' },
   { id: 'salesStaffInChargeName', label: '営業担当' },
-  { id: 'status', label: 'ステータス' },
-  { id: 'login', label: 'ログイン' },
+  { id: 'statusName', label: 'ステータス' },
+  { id: 'login', label: '操作' },
 ]
-
-// cssスタイル
-const useStyles = makeStyles({
-  // root: {
-  //   borderTop: '1px solid #eeeeee',
-  //   backgroundColor: '#f2f2f2',
-  // },
-  // header: {
-  //   whiteSpace: 'nowrap',
-  // },
-})
 
 interface EnhancedTableProps {
   onRequestSort: (event: any, property: string) => void

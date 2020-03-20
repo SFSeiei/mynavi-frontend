@@ -19,24 +19,14 @@ export default yup.object().shape({
     .test('isHalfWidth', validationMessageSet.halfWidth, (value: any) => miscRegexSet.halfWidth.test(value)),
   // 公開開始日_from
   publicStartDateFrom: yup
-  .date()
-  .nullable()
-  .test('publicStartDateTo',
-  '公開開始日範囲指定不正（From＞To）',
-  function(value: any) {
-    const endDateStr = this.parent.publicStartDateTo
-    if (endDateStr) {
-      const endDate = new Date(this.parent.publicStartDateTo)
-      const startDate = new Date(value)
-      return startDate <= endDate
-    } else {
-      return true
-    }
-  }),
+  .string()
+  .max(400, validationMessageSet.maxLength)
+  .test('isDate', validationMessageSet.date, (value: any) => miscRegexSet.date.test(value)),
   // 公開開始日_to
   publicStartDateTo: yup
-  .date()
-  .nullable(),
+  .string()
+  .max(400, validationMessageSet.maxLength)
+  .test('isDate', validationMessageSet.date, (value: any) => miscRegexSet.date.test(value)),
   // 障害報告
   categoryFaultReport: yup
     .string()

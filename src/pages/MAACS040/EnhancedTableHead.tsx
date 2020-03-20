@@ -4,9 +4,7 @@ import {
   TableCell,
   TableRow,
   TableSortLabel,
-  Checkbox,
 } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
 
 import { Order } from 'utils/misc'
 import magiStyles from 'css/magiStyle'
@@ -23,16 +21,6 @@ export const headCells = [
   { id: 'temporaryPasswordIssuance', label: '操作' },
 ]
 
-const useStyles = makeStyles({
-  // root: {
-  //   borderTop: '1px solid #eeeeee',
-  //   backgroundColor: '#f2f2f2',
-  // },
-  // header: {
-  //   whiteSpace: 'nowrap',
-  // },
-})
-
 interface EnhancedTableProps {
   numSelected: number
   onRequestSort: (event: any, property: string) => void
@@ -44,11 +32,8 @@ interface EnhancedTableProps {
 
 function EnhancedTableHead(props: EnhancedTableProps) {
   const {
-    onSelectAllClick,
     order,
     orderBy,
-    numSelected,
-    rowCount,
     onRequestSort,
   } = props
 

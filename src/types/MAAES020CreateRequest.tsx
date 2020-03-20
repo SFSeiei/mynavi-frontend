@@ -33,5 +33,5 @@ export interface MAAES020CreateRequest {
 
   // 添付ファイル
   // -
-  // fileSelected: File[];
+  fileSelected: File[];
 }

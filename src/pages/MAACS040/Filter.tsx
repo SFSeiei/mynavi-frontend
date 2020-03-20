@@ -12,37 +12,7 @@ import { RootState } from 'reducers'
 import MAACS040QueryRequestValidation from 'validations/MAACS040QueryRequestValidation'
 import magiStyles from 'css/magiStyle'
 
-
 const useStyles = makeStyles(theme => ({
-  // root: {
-  //   height: '100%',
-  //   display: 'flex',
-  //   flexDirection: 'column',
-  //   backgroundColor: '#deecf2',
-  // },
-  // select: {
-  //   marginBottom: theme.spacing(4),
-  // },
-  // selectInput: {
-  //   marginTop: theme.spacing(2),
-  // },
-  // buttonIcon: {
-  //   marginRight: theme.spacing(1),
-  // },
-  // content: {
-  //   flexGrow: 1,
-  // },
-  // contentSectionHeader: {
-  //   display: 'flex',
-  //   justifyContent: 'space-between',
-  //   cursor: 'pointer',
-  //   backgroundColor: theme.palette.primary.main,
-  //   padding: theme.spacing(1),
-  //   color: 'white',
-  //   '& h5': {
-  //     color: 'white',
-  //   },
-  // },
   formContainer: {
     justifyContent: 'flex-start',
     alignItems: 'center',
@@ -57,19 +27,6 @@ const useStyles = makeStyles(theme => ({
     paddingLeft: theme.spacing(6),
     paddingRight: theme.spacing(6),
   },
-  // field: {
-  //   marginTop: 0,
-  //   marginBottom: 0,
-  //   backgroundColor: 'white',
-  // },
-  // fieldName: {
-  //   marginTop: theme.spacing(1),
-  // },
-  // action: {
-  //   margin: theme.spacing(1, 0, 3),
-  // },
-  // none:{
-  // },
   formGroupOfName:{
     padding: theme.spacing(1),
     paddingTop: theme.spacing(2),
@@ -95,7 +52,7 @@ const Filter = ({ onFilter }: Props) => {
   const companyAccountSearchCondition = useSelector(
     (state: RootState) => state.company.companyAccountSearchCondition
   )
-  const [initialValue, setinitialValue] = useState(
+  const [initialValue] = useState(
     Object.keys(companyAccountSearchCondition).length !== 0 ? companyAccountSearchCondition : initialValues
   )
 

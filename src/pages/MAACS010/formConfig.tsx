@@ -23,7 +23,7 @@ const initialSeachData = {
   salesStaffName: '',
   adminId: '',
   mailAddressClient: '',
-  statusValid: '0',
+  statusValid: '1',
   statusInvalid: '0'
 };
 const rowDateInit = {
@@ -46,10 +46,10 @@ const rowDateInit = {
 };
 function messageData ( type: string, clientId:string, clientName:string ) {
   let messageData: string = "";
-  if ( type == 'login' ) {
+  if ( type === 'login' ) {
     messageData = '選択した企業にログインします。よろしいですか？<br/>企業ID：'+clientId+'<br/>企業名：'+clientName;
      return messageData;
-  }else if ( type == 'accountIssuance' ) {
+  }else if ( type === 'accountIssuance' ) {
     messageData = '選択した企業のアカウントを発行します。よろしいですか？<br/>企業ID：'+clientId+'<br/>企業名：'+clientName;
     return messageData;
   }else {

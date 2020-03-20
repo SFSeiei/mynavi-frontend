@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'reducers';
 import Results from './Results'
 import { initialValues} from './formConfig'
+import history from 'utils/history'
 import { Button,
   Dialog,
   DialogTitle,
@@ -14,7 +15,7 @@ import { Button,
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { Link } from 'react-router-dom';
 import { routeList } from 'routes/routes';
-import { searchOperationLogList } from 'reducers/operationLogReducer';
+import { searchSuggestList, setClientData } from 'reducers/operationLogReducer';
 import { getMessage } from 'common/messageUtil';
 import magiStyles from 'css/magiStyle'
 
@@ -23,17 +24,17 @@ import magiStyles from 'css/magiStyle'
   const [open, setOpen] = useState(false)
   const [query] = useState(initialValues)
   const dispatch = useDispatch()
-
-  // 検索条件を取得する
-  const operationLogPrim = useSelector((state: RootState) => state.operationLog.operationLogPrim)
+  //企業情報一覧画面から遷移した時、その画面で選択した行の企業IDと企業名
+  const state = history.location.state
   useEffect(() => {
-    // 画面初期表示
-    dispatch(searchOperationLogList(operationLogPrim))
-  }, [dispatch])
-
+    if (state) {
+      dispatch(setClientData(state))
+      dispatch(searchSuggestList())
+    }
+  }, [dispatch,state])
   // 検索結果を取得する
   const operationList = useSelector((state: RootState) => state.operationLog.searchresult)
-  const companyId = useSelector((state: RootState) => state.operationLog.operationLogPrim.clientId);
+  const companyId = state.clientId;
 
   const backToHome = () => {
   }

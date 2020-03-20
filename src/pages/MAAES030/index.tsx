@@ -20,7 +20,6 @@ import history from 'utils/history'
 import { Page, Label, SubTitle, FilesDropzone, DatePicker, Toggle } from 'components'
 import { categoryRadioList, publicRadioList, textMap } from './formConfig'
 import InputWithCounter from './InputWithCounter'
-import MultiTextWithCounter from './MultiTextWithCounter'
 import Preview from './Preview'
 import TextareaAutosize from './TextareaAutosize'
 import MarkDownEditor from './MarkDownEditor'
@@ -131,7 +130,7 @@ const MAAES030 = () => {
                       name='category'
                       label='分類'
                       component={Toggle}
-                      radioList={categoryRadioList}
+                      radiolist={categoryRadioList}
                       className={magiClasses.formContorl}
                     />
                   </Grid>
@@ -198,7 +197,7 @@ const MAAES030 = () => {
                       name='publicFlag'
                       label='公開状態'
                       component={Toggle}
-                      radioList={publicRadioList}
+                      radiolist={publicRadioList}
                       className={magiClasses.formContorl}
                     />
                   </Grid>

@@ -69,6 +69,9 @@ const notificationSlice = createSlice({
     initForNotiList(state) {
       return state
     },
+    notificationInitialize(state,title) {
+      return state;
+    },
     // 一覧取得
     selectNotificationList(state, action: PayloadAction<MAAES010QueryRequest>) {
       return state
@@ -152,6 +155,7 @@ const notificationSlice = createSlice({
 export const {
   // お知らせ情報一覧
   initForNotiList,
+  notificationInitialize,
   selectNotificationList,
   setNotiListResults,
   setNotiListSearchCondition,

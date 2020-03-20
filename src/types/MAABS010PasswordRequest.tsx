@@ -16,4 +16,7 @@ export default interface MAABS010PasswordRequest {
 
   // 新パスワード（確認用）
   newPasswordConfirm: string;
+
+  // システムバージョン
+  sysVersion: string;
 }

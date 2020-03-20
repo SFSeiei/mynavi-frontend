@@ -57,7 +57,7 @@ const useStyles = makeStyles(theme => ({
     color: 'white',
     borderRadius: theme.spacing(0.5, 0, 0, 0.5),
     textAlign: 'center',
-    position :'relative' ,top:'-132px',
+    position :'relative' ,top:'-120px',
     backgroundClip: 'padding-box',
     '&:after': {
       content: '" "',

@@ -15,7 +15,6 @@ const useStyles = makeStyles(theme => ({
   textarea: {
     border: '1px solid #e2e8f0',
     borderRadius: 4,
-    resize: 'none',
   },
   textareaError: {
     borderColor: '#e53935',
@@ -37,10 +36,10 @@ const useStyles = makeStyles(theme => ({
 const TextareaAutosize = ({ field, form, label, type, ...others }: Props) => {
   const classes = useStyles()
   const { errors, touched } = form
-  const { name, value, onChange, onBlur } = field
+  const { name, value, onBlur } = field
   const { className } = others
 
-  const handleChangeStrToArr = (event: any) => {
+  const handleOnChange = (event: any) => {
     const value = event.target.value
     form.setFieldValue(name, value === '' ? [] : value.split('\n'))
   }
@@ -54,21 +53,16 @@ const TextareaAutosize = ({ field, form, label, type, ...others }: Props) => {
           classes.textarea,
           touched[name] && errors[name] ? classes.textareaError : '',
         ].join(' ')}
-        value={value && name === 'newsTargetCompany' ? value.join('\n') : value}
+        value={value.join('\n')}
         name={name}
-        onChange={
-          name === 'newsTargetCompany' ? handleChangeStrToArr : onChange
-        }
+        onChange={handleOnChange}
         onBlur={onBlur}
+        rows={10}
       />
       <div>
         <FormControl error={Boolean(touched[name] && errors[name])}>
-          {touched[name] && errors[name] ? (
-            <p className={classes.helperText}>
-              {name === 'newsTargetCompany'
-                ? '公開対象にはフォーマットが正しくない項目が存在する'
-                : errors[name]}
-            </p>
+          {errors[name] && touched[name] ? (
+            <p className={classes.helperText}>{errors[name]}</p>
           ) : null}
         </FormControl>
       </div>

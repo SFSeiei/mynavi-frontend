@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { connect, useSelector } from 'react-redux'
+import { connect, useSelector, useDispatch } from 'react-redux'
 import { Avatar } from '@material-ui/core'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import { Formik, Form, FastField } from 'formik'
@@ -9,7 +9,7 @@ import { fieldList, initialValues } from './formConfig'
 import { validationSchemaAll, validationSchemaMo } from 'validations/MAABS010PasswordRequestValidation'
 import { RootState } from 'reducers'
 import { routeList } from 'routes/routes'
-
+import { getSysVersionNumberInit } from 'reducers/accountReducer'
 import history from 'utils/history'
 import { getToken } from 'utils/auth'
 import { magiContants } from 'utils/contants'
@@ -27,17 +27,19 @@ const AccountUpdatePassword = ({ updatePassword }: Props) => {
   if (state) {
     transitionSourceFlag = state.transitionSourceFlag;
   }
-
+  const dispatch = useDispatch()
   useEffect(() => {
     //遷移元フラグが0の場合に強制変更
     if (transitionSourceFlag === magiContants.TRANSITIONSOURCEFLAG_0) {
       setvalidationSchema(validationSchemaMo);
+    }else {
+      dispatch(getSysVersionNumberInit())
     }
-  }, [transitionSourceFlag]);
+  }, [dispatch,transitionSourceFlag]);
   if (!getToken() && transitionSourceFlag !== magiContants.TRANSITIONSOURCEFLAG_0) {
     history.push(routeList.login)
   }
-
+  const sysVersionDate = useSelector((state: RootState) => state.account.sysVersion)
   const magiClasses = magiStyles()
 
   const userInfo = useSelector((state: RootState) => state.globalMenu)
@@ -47,9 +49,10 @@ const AccountUpdatePassword = ({ updatePassword }: Props) => {
     updatePassword({
       transitionSourceFlag: transitionSourceFlag,
       managerId: userInfo.managerId ? userInfo.managerId : state.managerId,
-      currentPassword,
+      currentPassword: currentPassword ? currentPassword : newPassword,
       newPassword,
-      newPasswordConfirm
+      newPasswordConfirm,
+      sysVersion:sysVersionDate.sysVersionNumber
     })
   }
   return (
@@ -61,6 +64,7 @@ const AccountUpdatePassword = ({ updatePassword }: Props) => {
           </Avatar>
           {
             transitionSourceFlag === magiContants.TRANSITIONSOURCEFLAG_0 ? <Formik
+              enableReinitialize
               onSubmit={handleSubmit}
               validationSchema={validationSchema}
               initialValues={initialValues}
@@ -79,6 +83,7 @@ const AccountUpdatePassword = ({ updatePassword }: Props) => {
                      onSubmit={handleSubmit}
                      validationSchema={validationSchema}
                      initialValues={initialValues}
+                     enableReinitialize
 	                   render={() => (
                       <Form className={magiClasses.form}>
                         {fieldList.map(i => (

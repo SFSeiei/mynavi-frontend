@@ -5,16 +5,13 @@ import { makeStyles } from '@material-ui/core/styles'
 import { ListItem, Button, Collapse, colors } from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add'
 import { useDispatch } from 'react-redux'
-import { companyInitialize } from 'reducers/companyReducer'
+import { companyInitialize, initializeCompany } from 'reducers/companyReducer'
 import RemoveIcon from '@material-ui/icons/Remove'
-import { applicationInitialize } from 'reducers/applicationReducer'
-import { iinitList } from 'reducers/applicationReducer'
-
-const CustomRouterLink = forwardRef((props, ref) => (
-  <div ref={ref as any} style={{ flexGrow: 1 }}>
-    <RouterLink {...(props as any)} />
-  </div>
-))
+import { applicationInitialize, initialApplication } from 'reducers/applicationReducer'
+import { accountInitialize, initializeAccount } from 'reducers/accountReducer'
+import { initForNotiList, notificationInitialize } from 'reducers/notificationReducer'
+import { routeList } from 'routes/routes'
+import history from 'utils/history'
 
 const useStyles = makeStyles(theme => ({
   item: {
@@ -91,8 +88,24 @@ const NavigationListItem = ({
   }
   const handleInitialize = () => {
     dispatch(applicationInitialize(title))
+    dispatch(accountInitialize(title))
     dispatch(companyInitialize(title))
-    dispatch(iinitList())
+    dispatch(notificationInitialize(title))
+    if (title === 'アカウント一覧' ) {
+      dispatch(initializeAccount())
+    }
+    if (title === '企業情報一覧' ) {
+      dispatch(initializeCompany())
+    }
+    if (title === '申込情報一覧' ) {
+      dispatch(initialApplication())
+    }
+    if (title === 'お知らせ情報一覧' ) {
+      dispatch(initForNotiList())
+    }
+    if (title === 'パスワード変更' ) {
+      history.push(routeList.accountUpdatePassword)
+    }
   }; 
   let paddingLeft = 8
 
@@ -130,11 +143,6 @@ const NavigationListItem = ({
         disableGutters>
         <Button
           onClick={handleInitialize}
-          {...{
-            activeClassName: classes.active,
-            component: CustomRouterLink,
-            to: href,
-          }}
           className={clsx(classes.buttonLeaf, `depth-${depth}`)}
           style={style}>
           {Icon && <Icon className={classes.icon} />}

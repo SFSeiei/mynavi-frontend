@@ -8,3 +8,8 @@ export const updatePasswordRequest = (params:PasswordRequestDto) =>
     data:params,
   })
 
+export const initSysVersionNumber = () =>
+  request({
+    url: '/MAABS010/init',
+    method: 'post',
+})

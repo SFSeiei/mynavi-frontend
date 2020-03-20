@@ -31,7 +31,6 @@ import { useDispatch , useSelector } from 'react-redux'
 import { messageMap } from './formConfig'
 import { Paginate } from 'components'
 import { RootState } from 'reducers'
-import { routeList } from 'routes/routes'
 import {magiContants} from 'utils/contants';
 
 const useStyles = makeStyles(theme => ({
@@ -364,11 +363,7 @@ const Results = ({ accounts, className }: Props) => {
                           <TableCell key={c.id}>
                               <Link
                                 className={classes.linkCell}
-                                onClick={ () => linkClick(i)}
-                                to={
-                                  ''
-                                }
-                                component={RouterLink}>
+                                onClick={ () => linkClick(i)}>
                                 {i[c.id]}
                               </Link>
                             </TableCell>
@@ -376,10 +371,7 @@ const Results = ({ accounts, className }: Props) => {
                                 <TableCell key={c.id}>
                                 <Link
                                   className={classes.linkCell}
-                                  to={
-                                    ''
-                                  }
-                                  component={RouterLink}>
+                                  onClick={ () => linkClick(i)}>
                                   {i[c.id]}
                                 </Link>
                               </TableCell>

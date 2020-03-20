@@ -1,6 +1,6 @@
-import React, { CSSProperties, HTMLAttributes,useState } from 'react'
+import React, { CSSProperties, HTMLAttributes } from 'react'
 import clsx from 'clsx'
-import { FormControl, Grid } from '@material-ui/core'
+import { FormControl } from '@material-ui/core'
 import { FieldProps } from 'formik';
 import {
   createStyles,
@@ -14,8 +14,8 @@ import TextField, { BaseTextFieldProps } from '@material-ui/core/TextField'
 import Paper from '@material-ui/core/Paper'
 import Chip from '@material-ui/core/Chip'
 import MenuItem from '@material-ui/core/MenuItem'
-import CreatableSelect from 'react-select'
 import CancelIcon from '@material-ui/icons/Cancel'
+import CreatableSelect from 'react-select/creatable'
 import { ValueContainerProps } from 'react-select/src/components/containers'
 import { ControlProps } from 'react-select/src/components/Control'
 import { MenuProps, NoticeProps } from 'react-select/src/components/Menu'
@@ -24,7 +24,6 @@ import { OptionProps } from 'react-select/src/components/Option'
 import { PlaceholderProps } from 'react-select/src/components/Placeholder'
 import { SingleValueProps } from 'react-select/src/components/SingleValue'
 import { Omit } from '@material-ui/types'
-import { LabelC } from 'components/Label'
 
 export interface OptionType {
   label: string
@@ -92,25 +91,9 @@ const useStyles = makeStyles((theme: Theme) =>
       display: 'inline-block',
     },
     datelable:{
+      width:'20%',
       display: 'inline-block',
-      verticalAlign: 'middle',
-    },
-    formGroup: {
-      paddingRight: theme.spacing(6),
-    },
-    formGroupText:{
-      padding: theme.spacing(0),
-      paddingTop: theme.spacing(2),
-      paddingBottom: theme.spacing(2),
-      width: '30%',
-      verticalAlign: 'middle',
-    },
-    formGroupLabel:{
-      width:'35%',
-      display: 'inline-block',
-      paddingTop: theme.spacing(2),
-      paddingBottom: theme.spacing(2),
-      paddingLeft: theme.spacing(8),
+      position :'relative' ,top:'25px',left:'10px'
     },
   })
 )
@@ -175,7 +158,7 @@ function Option(props: OptionProps<OptionType>) {
   )
 }
 
-type Select = Omit<PlaceholderProps<OptionType>, 'innerProps'> &
+type MuiPlaceholderProps = Omit<PlaceholderProps<OptionType>, 'innerProps'> &
   Partial<Pick<PlaceholderProps<OptionType>, 'innerProps'>>
 
 function SingleValue(props: SingleValueProps<OptionType>) {
@@ -232,31 +215,16 @@ const components = {
 }
 
 interface Props extends FieldProps {
-  options: OptionType[],
-  department: string,
-  managerName: string,
-  initId: string,
-  initName: string,
-  initDepartment: string,
-  labelName: string,
+  options: OptionType[]
 }
-export function CompanySelect({ field, form, options,department,managerName,initId,initName,initDepartment,labelName }: Props) {
-  console.log("initName : "+initName)
-  const [departmentName, setDepartmentName] = useState(initDepartment)
+export function IntegrationReactSelect({ field, form, options }: Props) {
   const {name} = field
   const handleChange = (e: any) => {
-    form.setFieldValue(name, e.value)
-    form.setFieldValue(managerName, e.label)
-    form.setFieldValue(department, e.departmentName)
-    setDepartmentName(e.departmentName)
+    form.setFieldValue(name, e.label)
+    form.setFieldValue('loginId', e.value)
   }
   const classes = useStyles()
   const theme = useTheme()
-  const init = {
-    label: initName,
-    value: initId,
-    dapartmentName: initDepartment,
-  }
 
   const selectStyles = {
     input: (base: CSSProperties) => ({
@@ -269,32 +237,16 @@ export function CompanySelect({ field, form, options,department,managerName,init
   }
 
   return (
-    <FormControl className={classes.dateContainer}>
-      <div className={classes.dateContainer}>
-    <Grid container>
-          <Grid item xs={4} className={classes.formGroup}>
-            <CreatableSelect
-              defaultValue={init}
-              classes={classes}
-              styles={selectStyles}
-              placeholder=''
-              options={options}
-              components={components}
-              onChange={handleChange}
-              isSearchable={true}
-            />
-          </Grid>
-          <div className={classes.formGroupLabel}>
-            <LabelC>{labelName}</LabelC>
-          </div>
-          <div className={classes.formGroupText}>
-            <Typography variant='h5' className={classes.datelable}>
-              {departmentName}
-            </Typography>
-          </div>
-      </Grid>
-      </div>
-    </FormControl>
-  // </Grid>
+  <FormControl>
+      <CreatableSelect
+        classes={classes}
+        styles={selectStyles}
+        placeholder=''
+        options={options}
+        components={components}
+        onChange={handleChange}
+        isSearchable={true}
+      />
+  </FormControl> 
   )
 }

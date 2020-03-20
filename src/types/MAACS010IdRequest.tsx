@@ -4,6 +4,8 @@
 export default interface MAACS010IdRequest {
   // 企業ID
   companyId: number;
+  // 企業ID
+  companyName: String;
   // 企業契約媒体ID
   companyContractMediaId : String;
   // 企業担当者：部署

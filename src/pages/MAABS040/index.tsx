@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Formik, Form, FastField } from 'formik'
 import {
   Button,
@@ -14,11 +14,11 @@ import {
 import ArrowBackIcon from '@material-ui/icons/ArrowBack'
 import { Page, Label } from 'components'
 import { routeList } from 'routes/routes'
-import { initialValuesD, itemList, textMap } from './formConfig'
+import { initialValuesD, itemList, textMap, statusRadioList } from './formConfig'
 import history from 'utils/history'
 import { Checkbox,Toggle, TextField } from 'components'
 import { useDispatch, useSelector } from 'react-redux'
-import { updateAccount } from 'reducers/accountReducer'
+import { updateAccount, getAccountDetail, } from 'reducers/accountReducer'
 import { RootState } from 'reducers'
 import schemaList from 'validations/MAABS040UpdateRequestValidation'
 import magiStyles from 'css/magiStyle'
@@ -32,11 +32,14 @@ const AccountDetail = () => {
   const { managerId } = useSelector((state: RootState) => state.globalMenu)
 
   const state = history.location.state;
-  let params  = -1;
+  let params  = '';
   if (state) {
-    params = history.location.state.accountInfo.managerId;
+    params = state;
   }
   const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(getAccountDetail(params))
+  }, [dispatch])
   const rawData = useSelector((state: RootState) => state.account.accountDetailResults)
 
   const backToHome = () => {
@@ -111,11 +114,11 @@ const AccountDetail = () => {
                       <Grid item xs={9} className={magiClasses.formGroup}>
                         <FastField
                           disabled={i.name === 'managerId' ? true
-                            : (i.name === 'permissions' ? (managerId === rawData.managerId.toString() ? true : false)
                               : (i.name === 'status' ? (managerId === rawData.managerId.toString() ? true : false)
-                              :false)
+                              :false
                             )
                           }
+                          radiolist={statusRadioList}
                           name={i.name}
                           label={i.label}
                           component={
@@ -206,16 +209,16 @@ const AccountDetail = () => {
               </CardContent>
               <CardActions className={magiClasses.buttonGroup}>
                 <Button
-                  type='submit'
-                  variant='contained'
-                  className={magiClasses.confirmButton}>
-                  更新する
-                </Button>
-                <Button
                   className={magiClasses.cancel}
                   onClick={handleCancelButton}
                   variant='contained'>
                   キャンセルする
+                </Button>
+                <Button
+                  type='submit'
+                  variant='contained'
+                  className={magiClasses.confirmButton}>
+                  更新する
                 </Button>
               </CardActions>
             </Form>

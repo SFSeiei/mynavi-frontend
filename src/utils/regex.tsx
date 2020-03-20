@@ -1,4 +1,6 @@
 import XRegExp from 'xregexp'
+import { convertStringForIe } from './misc'
+import { stringToDate } from 'common/generalUtil'
 
 /* eslint-disable no-useless-escape */
 /* eslint-disable no-control-regex */
@@ -806,9 +808,20 @@ const excludedSet = XRegExp(
 const miscRegexSet = {
   halfWidthNumber: /^\d*$/u,
   halfWidthAlphanumericSymbol: /^[a-zA-Z0-9!-/:-@¥[-`{-~]*$/u,
-  halfWidth: /^.*$/u,
+  halfWidth: /^.*$/mu,
   fullWidth: /^[^\x01-\x7E]*$/u,
   fullWidthKana: /^[ぁ-んァ-ン]*$/u,
+  date: {
+    test: (input: string) => {
+      if (input) {
+        return (
+          /^(\d{4}\/\d{1,2}\/\d{1,2})*$/u.test(input ? input : '') &&
+          stringToDate(input) != null
+        )
+      }
+      return true
+    },
+  },
   password: /^(?=.*?[a-z])(?=.*?\d)(?=.*?[!-\/:-@[-`{-~])[!-~]{8,100}$/u,
   datetime: /^(\d{2}:\d{2})*$/u,
   postalCode: /^(\d{3}-?\d{4})*$/u,

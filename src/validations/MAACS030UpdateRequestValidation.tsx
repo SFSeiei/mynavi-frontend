@@ -187,8 +187,8 @@ export default yup.object().shape({
     .test('isHalfWidth', validationMessageSet.halfWidth, (value: any) => miscRegexSet.halfWidth.test(value)),
 
   // ステータス
-  // status: yup
-  //   .number()
-  //   .min(0, validationMessageSet.minValue)
-  //   .max(1, validationMessageSet.maxValue),
+  status: yup
+    .number()
+    .min(0, validationMessageSet.minValue)
+    .max(1, validationMessageSet.maxValue),
 });

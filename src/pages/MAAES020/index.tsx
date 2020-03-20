@@ -17,7 +17,14 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack'
 import { routeList } from 'routes/routes'
 import { Formik, Form, FastField, Field } from 'formik'
 import history from 'utils/history'
-import { Page, Label, SubTitle, FilesDropzone, DatePicker, Toggle } from 'components'
+import {
+  Page,
+  Label,
+  SubTitle,
+  FilesDropzone,
+  DatePicker,
+  Toggle,
+} from 'components'
 import {
   categoryRadioList,
   publicRadioList,
@@ -25,17 +32,19 @@ import {
   initialValues,
 } from './formConfig'
 import InputWithCounter from './InputWithCounter'
-import MultiTextWithCounter from './MultiTextWithCounter'
 import Preview from './Preview'
 import MarkDownEditor from './MarkDownEditor'
 import TextareaAutosize from './TextareaAutosize'
 import MAAES020CreateRequestValidation from 'validations/MAAES020CreateRequestValidation'
 import {
-  setNotificationCreateValues,
-  createNotification,
   initialCreate,
 } from 'reducers/notificationReducer'
 import magiStyles from 'css/magiStyle'
+import {
+  createNotificationRequest,
+} from 'apis/MAAES020Api'
+import { getMessage } from 'common/messageUtil'
+import { magiContants } from 'utils/contants'
 
 const useStyles = makeStyles(theme => ({
   dateline: {
@@ -55,10 +64,10 @@ const MAAES020 = () => {
   const [dialogOpen, setDialogOpen] = useState(false)
   const [type, setType] = useState<keyof typeof textMap>('create')
   const dispatch = useDispatch()
+  const [formValues, setFormValue] = useState(initialValues)
   const formValue = useSelector(
     (state: RootState) => state.notification.notiRegisterForm
   )
-
   // 前画面から引き継ぐお知らせID
   const state = history.location.state
   let newsId = -1
@@ -69,16 +78,13 @@ const MAAES020 = () => {
     if (newsId !== -1) {
       dispatch(initialCreate(newsId))
     }
-    return () => {
-      dispatch(setNotificationCreateValues(initialValues))
-    }
   }, [newsId, dispatch])
 
   // 「登録する」ボタンクリック
   const handleSubmit = (values: any) => {
+    setFormValue(values)
     setDialogOpen(true)
     setType('create')
-    dispatch(setNotificationCreateValues(values))
   }
 
   // 「キャンセルする」かつ「一覧に戻る」ボタンクリック
@@ -108,9 +114,9 @@ const MAAES020 = () => {
   }
 
   const submitToApi = () => {
-    dispatch(createNotification(formValue))
-    backToNotification()
-    // setFormValue(values);
+    createNotificationRequest(formValues).then(response => {
+      backToNotification()
+    })
   }
 
   return (
@@ -125,9 +131,31 @@ const MAAES020 = () => {
       </Button>
       <Card>
         <Formik
+          enableReinitialize
           initialValues={formValue}
           validationSchema={MAAES020CreateRequestValidation}
-          enableReinitialize
+          validate={values => {
+            const errors = {
+              fileSelected: '',
+            }
+            if (
+              !values.fileSelected.every((file: File) => {
+                const fileType = file.name.split('.')[
+                  file.name.split('.').length - 1
+                ]
+                return 'doc,gif,jpg,jpeg,pdf,png,pps,ppt,pptx,txt,xls,docx,xlsx'.includes(
+                  fileType
+                )
+              })
+            ) {
+              errors.fileSelected = getMessage(magiContants.MESSAGECODE_MAAES020_005)
+              return errors
+            }
+            if (values.fileSelected.length > 10) {
+              errors.fileSelected = getMessage(magiContants.MESSAGECODE_MAAES020_001)
+              return errors
+            }
+          }}
           onSubmit={handleSubmit}>
           <Form>
             <CardContent>
@@ -140,7 +168,7 @@ const MAAES020 = () => {
                       name='category'
                       label='分類'
                       component={Toggle}
-                      radioList={categoryRadioList}
+                      radiolist={categoryRadioList}
                       className={magiClasses.formContorl}
                     />
                   </Grid>
@@ -153,7 +181,6 @@ const MAAES020 = () => {
                         name='subject'
                         label=''
                         component={InputWithCounter}
-                        className={magiClasses.textField}
                         maxAmount={10}
                       />
                     </Grid>
@@ -166,7 +193,6 @@ const MAAES020 = () => {
                       <FastField
                         name='body'
                         label='本文'
-                        // className={magiClasses.bodyTextArea}
                         component={MarkDownEditor}
                         maxAmount={20000}
                       />
@@ -178,12 +204,14 @@ const MAAES020 = () => {
                     <Label>公開対象</Label>
                     <Grid container alignItems='center'>
                       <Grid item xs={6} className={magiClasses.formGroup}>
+                        <div>
                         <FastField
                           name='newsTargetCompany'
                           label='公開対象'
                           component={TextareaAutosize}
                           className={magiClasses.newsTargetCompany}
                         />
+                        </div>
                       </Grid>
                       <Grid item xs={5} className={magiClasses.formGroup}>
                         <Typography>※公開対象</Typography>
@@ -207,7 +235,7 @@ const MAAES020 = () => {
                       name='publicFlagPublic'
                       label='公開状態'
                       component={Toggle}
-                      radioList={publicRadioList}
+                      radiolist={publicRadioList}
                       className={magiClasses.formContorl}
                     />
                   </Grid>
@@ -280,16 +308,16 @@ const MAAES020 = () => {
             </CardContent>
             <CardActions>
               <Button
-                type='submit'
-                variant='contained'
-                className={magiClasses.confirmButton}>
-                登録する
-              </Button>
-              <Button
                 variant='contained'
                 className={magiClasses.cancel}
                 onClick={handleCancel}>
                 キャンセルする
+              </Button>
+              <Button
+                type='submit'
+                variant='contained'
+                className={magiClasses.confirmButton}>
+                登録する
               </Button>
             </CardActions>
           </Form>

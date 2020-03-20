@@ -1,16 +1,9 @@
-import React, { useState } from 'react'
-import { EditorState, Editor, RichUtils } from 'md-draft-js'
-import ReactMarkdown from 'react-markdown'
-import {
-  Paper,
-  Divider,
-  Button,
-  Typography,
-  FormControl,
-} from '@material-ui/core'
+import { Divider, FormControl, Paper, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import EditorToolbar from './EditorToolbar'
 import { FieldProps } from 'formik'
+import { Editor, EditorState, RichUtils } from 'md-draft-js'
+import React, { useState } from 'react'
+import EditorToolbar from './EditorToolbar'
 
 const useStyles = makeStyles(theme => ({
   editorContainer: {
@@ -51,25 +44,25 @@ interface Props extends FieldProps {
   maxAmount: number
 }
 
-const MarkDownEditor = ({ field, form, maxAmount }: Props) => {
+const MarkDownEditor = ({ field, form, maxAmount, ...others }: Props) => {
   const classes = useStyles()
   const { name, value } = field
   const { errors, touched } = form
-  // const [editorState, setEditorState] = useState(EditorState.createEmpty())
   const [editorState, setEditorState] = useState(
-    EditorState.createWithContent(value)
+    value ? EditorState.createWithContent(value) : EditorState.createEmpty()
   )
-  const [previewContent, setPreviewContent] = useState('')
 
   const handelOnChange = (editorState: any) => {
-    setEditorState(editorState)
     if (maxAmount && maxAmount >= EditorState.getText(editorState).length) {
-      form.setFieldValue(name, EditorState.getText(editorState))
+      setEditorState(editorState)
+    } else {
+      setEditorState(
+        EditorState.createWithContent(
+          EditorState.getText(editorState).substr(0, maxAmount)
+        )
+      )
     }
-  }
-
-  const handlePreview = () => {
-    setPreviewContent(EditorState.getText(editorState))
+    form.setFieldValue(name, EditorState.getText(editorState))
   }
 
   const handleClick = (command: string) => () => {
@@ -96,6 +89,7 @@ const MarkDownEditor = ({ field, form, maxAmount }: Props) => {
           <EditorToolbar onClick={handleClick} onLink={handleLink} />
           <Divider />
           <Editor
+            {...others}
             className={classes.editorContainer}
             editorState={editorState}
             onChange={handelOnChange}

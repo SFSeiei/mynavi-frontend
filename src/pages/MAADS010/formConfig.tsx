@@ -22,7 +22,7 @@ const statusList = [
 ]
 
 const initialValues = {
-  charge: '0',
+  charge: '1',
   salesStaff: '',
   managerId: '',
   agency: '',
@@ -34,11 +34,11 @@ const initialValues = {
   endDateTo: '',
   // applicationTypes: [],
   // status: [],
-  applicationTypeNormal: '0', //申込種別_通常
-  applicationTypeEmploymentNaviPre: '0', //申込種別_就職ナビ(プレ)
-  applicationTypeEmploymentNaviMain: '0', //申込種別_就職ナビ(本サイト)
-  applicatiionTypeJobChangeNavi: '0', //申込種別_転職ナビ
-  statusValid: '0', //ステータス_有効
+  applicationTypeNormal: '1', //申込種別_通常
+  applicationTypeEmploymentNaviPre: '1', //申込種別_就職ナビ(プレ)
+  applicationTypeEmploymentNaviMain: '1', //申込種別_就職ナビ(本サイト)
+  applicatiionTypeJobChangeNavi: '1', //申込種別_転職ナビ
+  statusValid: '1', //ステータス_有効
   statusInvalid: '0',//ステータス_無効
 }
 const initialDetailValues = {

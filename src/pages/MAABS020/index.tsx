@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import { Button } from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add'
 
@@ -8,8 +7,10 @@ import Filter from './Filter'
 import Results from './Results'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from 'reducers'
-import { routeList } from 'routes/routes'
-import { selectAccountList , setAccountListSearchCondition } from 'reducers/accountReducer';
+import { selectAccountList ,
+         setAccountListSearchCondition,
+         getAccountCreateInit 
+       } from 'reducers/accountReducer';
 import magiStyles from 'css/magiStyle'
 
 
@@ -20,18 +21,18 @@ const Home = () => {
   const accountList = useSelector((state: RootState) => state.account.accountListResults)
 
   const handleFilter = (values: any) => {
-   // setQuery(values)
     dispatch(setAccountListSearchCondition(values))
     dispatch(selectAccountList(values))
   }
-
+  const handleInitialize = () => {
+    dispatch(getAccountCreateInit())
+  }
   return (
     <Page className={magiClasses.rootModify} title='社内アカウント一覧 - マイナビ'>
       <SubTitle>社内アカウント一覧</SubTitle>
       <Filter onFilter={handleFilter} />
       <Button
-        component={Link}
-        to={routeList.accountCreate}
+        onClick={handleInitialize}
         variant='contained'
         color='primary'
         className={magiClasses.results}>

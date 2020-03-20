@@ -100,6 +100,7 @@ const Results = ({userInfo, companys, className}: Props) => {
   const [open, setOpen] = useState(false)
   const [type, setType] = useState('')
   const [page, setPage] = useState(0)
+  const [usagePeriod] = useState(getRangeDate(-30))
   const [rowData, setRowData] = useState(rowDateInit)
   const [order, setOrder] = useState<Order>('asc')
   const [orderBy, setOrderBy] = useState('name')
@@ -140,7 +141,6 @@ const Results = ({userInfo, companys, className}: Props) => {
       usagePeriodFromH: '0', //対象期間From（時）
       usagePeriodToYMD: '',  //対象期間To（年月日）
       usagePeriodToH: '',  //対象期間To（時）
-      // manipulationType: [],  //操作種別
       manipulationTypeMagiCompanyLogin: '0', //Magi 企業ログイン
       manipulationTypeMagiCompanyLogout:'0',//Magi 企業ログアウト
       manipulationTypeTermsAgree:'0', //利用規約への同意
@@ -174,8 +174,6 @@ const Results = ({userInfo, companys, className}: Props) => {
       clientId: data.companyId, //企業ID
       clientName: data.companyName, //企業名 
       fullName:'', // 操作者ID
-      // accountArray: [],  //操作者
-      // statusArray: [],  //IPアドレス
       accountTypeSupervising: '0',
       accountTypeAdministrator: '0',
       accountTypeSemiManager: '0',
@@ -189,6 +187,7 @@ const Results = ({userInfo, companys, className}: Props) => {
   const handleOperation = () => {
     const clientIdRequestData  = {
       companyId: rowData.companyId,
+      companyName:rowData.companyName,
       companyContractMediaId: rowData.companyContractMediaId,
       companyStaffDepartmentName: rowData.accountIssuanceStatementName,
       companyStaffName: rowData.companyStaffName,
@@ -198,10 +197,6 @@ const Results = ({userInfo, companys, className}: Props) => {
     };
     setOpen(false)
     if (type === 'login') {
-          const loginClickData = {
-            companyId: rowData.companyId,
-            managerId: rowData.managerId
-          };
         dispatch(proxyLogin())
       }else if (type === 'accountIssuance') {
         dispatch(accountIssuance(clientIdRequestData))
@@ -263,10 +258,6 @@ const Results = ({userInfo, companys, className}: Props) => {
                                 <br />
                               {permissions.some(j => routePermissionList[routeList.companyAccount].includes(j))
                                ? <Link
-                                  // to={{
-                                  //   pathname: routeList.companyDetail,
-                                  //   state: (i as any)['companyId'],
-                                  // }}
                                   to={''}
                                   onClick={ () => linkClick(i)}
                                   component={RouterLink}>
@@ -305,15 +296,21 @@ const Results = ({userInfo, companys, className}: Props) => {
                               }
                               {permissions.some(y => permissionsList.includes(y))
                                 ? <Button component={RouterLink}
-                                          to={'/operationLog/init'} 
-                                          onClick={ () => handleOperationLog(i)} 
+                                          to={
+                                            {
+                                              pathname: routeList.operationLog,
+                                              state:{clientId: (i as any)['companyId'], //企業ID
+                                                     clientName: (i as any)['companyName'],
+                                                     usagePeriodFromYMD: usagePeriod,
+                                                    }
+                                            }} 
                                           className={classes.confirmButton} variant='contained'>
                                     操作ログ
                                   </Button>
                                 : ''
                               }
                               {permissions.includes(magiContants.AUTHORITYID_60) &&
-                               !permissions.some(z => permissionsList.includes(z)) && i.managerId !== managerId
+                               !permissions.some(z => permissionsList.includes(z)) &&  (i.managerId === null || i.managerId.toString() !== managerId)
                                 ? ''
                                 : <Button component={RouterLink}
                                     to={{
@@ -325,7 +322,7 @@ const Results = ({userInfo, companys, className}: Props) => {
                                   </Button>
                               }
                               {(permissions.includes(magiContants.AUTHORITYID_60) &&
-                               !permissions.some(z => permissionsList.includes(z)) && i.managerId !== managerId)
+                               !permissions.some(z => permissionsList.includes(z)) && (i.managerId === null || i.managerId.toString() !== managerId))
                                                  || i.status === magiContants.STATUSINVALID || i.companyStaffName === magiContants.COMPANYSTAFFNAME_NULL 
                                 ? ''
                                 : i.accountIssuanceStatement === magiContants.ACCOUNTISSUANCE_STATEMENT
@@ -341,7 +338,7 @@ const Results = ({userInfo, companys, className}: Props) => {
                                    </Button> 
                               }
                               {permissions.includes(magiContants.AUTHORITYID_60) &&
-                               !permissions.some(z => permissionsList.includes(z)) && i.managerId !== managerId
+                               !permissions.some(z => permissionsList.includes(z)) && (i.managerId === null || i.managerId.toString() !== managerId)
                                 ? ''
                                 : <Button component={RouterLink}
                                     to={'/company/companyAccount'} 

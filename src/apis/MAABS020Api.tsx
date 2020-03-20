@@ -42,6 +42,10 @@ export const fetchRequest = () =>
     url: '/MAABS020/list',
     method: 'get',
   })
-
+export const initializeRequest = () =>
+  request({
+    url: '/MAABS020/init',
+    method: 'post',
+})
 
 

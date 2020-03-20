@@ -7,9 +7,12 @@ import {
   takeEvery,
 } from 'redux-saga/effects'
 import { magiContants } from 'utils/contants'
+import { initialValues } from '../pages/MAAES010/formConfig'
 import {
   initForNotiList,
+  notificationInitialize,
   selectNotificationList,
+  setNotiListSearchCondition,
   setNotiListResults,
   updateByPublic,
   updateByNoPublic,
@@ -41,14 +44,27 @@ import {
 } from 'apis/MAAES030Api'
 import { MAAES030UpdateRequest } from 'types/MAAES030UpdateRequest'
 import history from 'utils/history'
+import { routeList } from 'routes/routes'
 
 // お知らせ情報一覧
 // 初期処理
 function* initForNotiListSaga() {
   try {
     yield call(initRequest)
+    history.push(routeList.notification)
   } catch (error) {
-    history.push('/notFound')
+    yield put(openSnackbar(error.message));
+  }
+}
+function* initialize(action: ReturnType<typeof notificationInitialize>) {
+  try {
+    const dataNewList = [] as any
+    if (action.payload !== 'お知らせ情報一覧') {
+      yield put(setNotiListResults(dataNewList));
+      yield put(setNotiListSearchCondition(initialValues));
+    }
+  } catch (error) {
+    yield put(openSnackbar(error.message))
   }
 }
 // 一覧を取得
@@ -161,6 +177,7 @@ export default function* notificationSaga() {
   yield all([
     //　お知らせ情報一覧
     takeEvery(initForNotiList, initForNotiListSaga),
+    takeEvery(notificationInitialize, initialize),
     takeLatest(selectNotificationList, selectNotificationListSaga),
     takeEvery(updateByPublic, updateByPublicSaga),
     takeEvery(updateByNoPublic, updateByNoPublicSaga),

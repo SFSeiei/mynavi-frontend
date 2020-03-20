@@ -10,7 +10,6 @@ import NavBar from './NavBar'
 import { RootState } from 'reducers'
 import ScrollReset from 'components/ScrollReset'
 import { Footer } from 'components'
-import { searchSuggestList } from 'reducers/operationLogReducer'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -55,7 +54,7 @@ const DashboardLayout = ({ route }: RouteConfigComponentProps) => {
   const [openNavBarMobile, setOpenNavBarMobile] = useState(false)
   const userInfo = useSelector((state: RootState) => state.globalMenu)
   const containerRef = useRef(null)
-
+  const { managerId } = userInfo
   const handleNavBarMobileOpen = () => {
     setOpenNavBarMobile(true)
   }
@@ -68,7 +67,6 @@ const DashboardLayout = ({ route }: RouteConfigComponentProps) => {
   useEffect(() => {
     dispatch(getUserInfo())
     dispatch(searchAdminDateList())
-    dispatch(searchSuggestList())
   }, [dispatch])
 
   return (
@@ -76,6 +74,7 @@ const DashboardLayout = ({ route }: RouteConfigComponentProps) => {
       <TopBar
         className={classes.topBar}
         onOpenNavBarMobile={handleNavBarMobileOpen}
+        managerId={managerId}
       />
       <div className={classes.container}>
         <NavBar

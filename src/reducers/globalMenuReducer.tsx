@@ -26,7 +26,9 @@ const globalMenuSlice = createSlice({
       ...state,
       ...action.payload,
     }),
-    signout: state => state,
+    signout(state, action: PayloadAction<string>) {
+      return state
+    },
     signoutSuccess: (state) => {
       removeToken();
       replaceToOrigin();

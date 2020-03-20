@@ -155,10 +155,10 @@ const magiStyles = makeStyles(theme => ({
   },
   newsTargetCompany: {
     marginTop: theme.spacing(2),
-    // padding: '4px 8px',
-    width: '70%',
-    minWidth: 200,
-    minHeight: 106,
+    minWidth: 400,
+    minHeight: 150,
+    maxWidth: 400,
+    maxHeight: 150,
   },
   bodyTextArea: {
     marginTop: theme.spacing(2),

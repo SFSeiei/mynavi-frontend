@@ -1,5 +1,4 @@
 import React from 'react'
-import { makeStyles } from '@material-ui/core/styles'
 import { SubTitle, Page } from 'components'
 import Filter from './Filter'
 import Results from './Results'
@@ -7,15 +6,6 @@ import { useSelector } from 'react-redux'
 import { RootState } from 'reducers'
 import magiStyles from 'css/magiStyle'
 
-// cssスタイル
-const useStyles = makeStyles(theme => ({
-  // root: {
-  //   padding: theme.spacing(3),
-  // },
-  // results: {
-  //   marginTop: theme.spacing(3),
-  // },
-}))
 const Home = () => {
   const magiClasses = magiStyles()
   // 検索結果を取得

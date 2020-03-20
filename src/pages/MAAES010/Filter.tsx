@@ -11,6 +11,7 @@ import { RootState } from 'reducers'
 import MAAES010QueryRequestValidation from 'validations/MAAES010QueryRequestValidation'
 import magiStyles from 'css/magiStyle'
 
+// css個別定義
 const useStyles = makeStyles(theme => ({
   formContainer: {
     justifyContent: 'flex-start',
@@ -21,7 +22,7 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(1),
   },
 }))
-
+// 属性個別定義
 interface Props {
   onFilter: (query: object) => void
 }
@@ -34,6 +35,7 @@ const Filter = ({ onFilter }: Props) => {
   const magiClasses = magiStyles()
   const [expandProject, setExpandProject] = useState(true)
 
+  // カードスイッチ
   const handleToggleProject = () => {
     setExpandProject(!expandProject)
   }
@@ -43,6 +45,22 @@ const Filter = ({ onFilter }: Props) => {
       <Formik
         initialValues={initialValues}
         validationSchema={MAAES010QueryRequestValidation}
+        // 相関チェック
+        validate={values => {
+          const errors = {
+            publicStartDateFrom: '',
+            publicStartDateTo: '',
+          }
+          if (
+            values.publicStartDateFrom &&
+            values.publicStartDateTo &&
+            values.publicStartDateFrom > values.publicStartDateTo
+          ) {
+            errors.publicStartDateFrom = '公開開始日範囲指定不正（From＞To）'
+            errors.publicStartDateTo = '公開開始日範囲指定不正（From＞To）'
+            return errors
+          }
+        }}
         onSubmit={onFilter}>
         <Form className={magiClasses.rootList}>
           <div className={magiClasses.content}>
@@ -91,7 +109,7 @@ const Filter = ({ onFilter }: Props) => {
                   </Grid>
                 </React.Fragment>
                 <Grid item xs={1} style={{ flexBasis: 0 }}>
-                ～
+                  ～
                 </Grid>
                 <React.Fragment key='publicStartDateTo'>
                   <Grid item xs={2} className={classes.formGroup}>

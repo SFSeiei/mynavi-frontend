@@ -1,6 +1,6 @@
 import React from 'react'
 import { FieldProps } from 'formik'
-import { DatePicker as MuiDatePicker } from '@material-ui/pickers'
+import { KeyboardDatePicker as MuiDatePicker } from '@material-ui/pickers'
 import { PropTypes } from '@material-ui/core'
 
 interface Props extends FieldProps {
@@ -15,14 +15,18 @@ const DatePicker = ({ margin = 'dense', field, form }: Props) => {
     <MuiDatePicker
       clearable
       inputVariant='outlined'
-      format='MM/DD/YYYY'
+      format='YYYY/MM/DD'
       fullWidth
       margin={margin}
       name={name}
-      value={value}
+      value={isNaN(Date.parse(value)) ? null : new Date(value)}
+      inputValue={value}
       helperText={errors[name] && touched[name] ? errors[name] : null}
       error={Boolean(errors[name] && touched[name])}
-      onChange={date => form.setFieldValue(field.name, date, true)}
+      onChange={(date, value) => {
+        form.setFieldValue(field.name, value ? value : '', true)
+        form.setFieldTouched(field.name, true, true)
+      }}
     />
   )
 }

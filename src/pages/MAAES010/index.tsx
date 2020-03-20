@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Button } from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add'
 import { Link } from 'react-router-dom'
@@ -9,7 +9,6 @@ import Results from './Results'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from 'reducers'
 import {
-  initForNotiList,
   selectNotificationList,
   setNotiListSearchCondition,
 } from 'reducers/notificationReducer'
@@ -19,12 +18,12 @@ import magiStyles from 'css/magiStyle'
 const MAAES010 = () => {
   const magiClasses = magiStyles()
   const dispatch = useDispatch()
+  // お知らせ一覧結果
   const notiList = useSelector(
     (state: RootState) => state.notification.notiListResults
   )
-  useEffect(() => {
-    dispatch(initForNotiList())
-  }, [dispatch])
+
+  // 検索フィルター
   const handleFilter = (values: any) => {
     dispatch(setNotiListSearchCondition(values))
     dispatch(selectNotificationList(values))

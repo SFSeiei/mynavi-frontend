@@ -12,13 +12,7 @@ export interface MAACS040QueryRequest {
   
     // 氏名
     fullName: string;
-
-    //アカウント種別
-    // accountArray:string[];
-
-    //ステータス
-    // statusArray: string[];
-    
+  
     // アカウント種別_統括
     accountTypeSupervising: string;
   

@@ -1,8 +1,8 @@
 import request from 'utils/request'
 
-export const logoutRequest = () =>
+export const logoutRequest = (managerId: string) =>
   request({
-    url: `MAAGS010/logout`,
+    url: `MAAGS010/logout/${managerId}`,
     method: 'post',
   })
 

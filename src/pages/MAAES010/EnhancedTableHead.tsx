@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import {
   TableHead,
   TableCell,
   TableRow,
   TableSortLabel,
-  Checkbox,
 } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
@@ -89,7 +88,7 @@ function EnhancedTableHead(props: EnhancedTableProps) {
         {headCells.map(headCell => (
           <TableCell
             className={
-              headCell.id == 'listCategory'
+              headCell.id === 'listCategory'
               ? classes.tableCellCategory
               : classes.tableCell
             }

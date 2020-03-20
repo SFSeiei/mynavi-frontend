@@ -15,7 +15,6 @@ export interface Permission {
   sortOrder: string | null
   status: string | null
 }
-
 export interface AuthorityMaster {
   [key: string]: string | null
   authorityId: string
@@ -83,7 +82,8 @@ export interface AccountsD {
   department: string //部署名
   mailAddress: string //メールアドレス
   email: string //メールアドレス
-  invalidUser: number //ステータス
+  status: string//ステータス
+  statusOld: string//ステータスチェック用
   authorityName: string //権限
   authoritySystem: string //システム管理
   authorityAccount: string //アカウント管理
@@ -99,6 +99,12 @@ export interface AccountsD {
   authCompanyFlag: string //企業管理フラグ
   authSupportFlag: string //企業サポートフラグ
   authSalesFlag: string //営業フラグ
+  authSystemFlagOld: string //システム管理フラグチェック用
+  authAccountFlagOld: string //アカウント管理フラグチェック用
+  authannounceForCompanyFlagOld: string //企業向けアナウンスフラグチェック用
+  authCompanyFlagOld: string //企業管理フラグチェック用
+  authSupportFlagOld: string //企業サポートフラグチェック用
+  authSalesFlagOld: string //営業フラグチェック用
   sysVersionNumberAdmin: number;//sysバージョン番号
 }
 export interface CreateInit {
@@ -109,6 +115,9 @@ export interface CreateInit {
   authSupportFlag: string //企業サポートフラグ
   authSalesFlag: string //営業フラグ
 }
+export interface SysVersionNumbereInit {
+  sysVersionNumber: string //システム
+}
 
 interface AccountList {
   accountListSearchCondition: MAABS020QueryRequest,
@@ -117,6 +126,7 @@ interface AccountList {
   inValidCheckCount: number,
   accountrs: Account[],
   accountCreateInit: CreateInit,
+  sysVersion:SysVersionNumbereInit,
 }
 const accountList: AccountList = {
   accountListSearchCondition: initialValues,
@@ -124,7 +134,8 @@ const accountList: AccountList = {
   accountDetailResults: initialValuesD,
   inValidCheckCount: 0 ,
   accountrs: [],
-  accountCreateInit: initialValuesCreate
+  accountCreateInit: initialValuesCreate,
+  sysVersion: {sysVersionNumber: ''},
 };
 
 
@@ -132,6 +143,13 @@ const accountSlice = createSlice({
   slice: 'accout',
   initialState: accountList,
   reducers: {
+    //initial
+    accountInitialize(state,title) {
+      return state;
+    },
+    initializeAccount(state) {
+      return state;
+    },
     getAccountDetail(state, action: PayloadAction<string>) {
       return state
     },
@@ -207,10 +225,19 @@ const accountSlice = createSlice({
     updatePasswordSuccess() {
       replaceToOrigin();
     },
+    setSysVersionNumberInit(state, action: PayloadAction<SysVersionNumbereInit>) {
+      state.sysVersion = action.payload;
+      return state;
+    },
+    getSysVersionNumberInit(state) {
+      return state;
+    },
   },
 })
 
 export const {
+  accountInitialize,
+  initializeAccount,
   getAccountDetail,
   setAccountDetail,
   getAccountCreateInit,
@@ -230,5 +257,7 @@ export const {
   deleteAccount,
   updatePassword,
   updatePasswordSuccess,
+  setSysVersionNumberInit,
+  getSysVersionNumberInit
 } = accountSlice.actions
 export default accountSlice.reducer

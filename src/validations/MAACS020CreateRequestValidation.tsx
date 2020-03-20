@@ -12,8 +12,8 @@ export default yup.object().shape({
   clientName: yup
     .string()
     .required(validationMessageSet.required)
-    .max(200, validationMessageSet.maxLength),
-    // .test('isHalfWidth', validationMessageSet.halfWidth, (value: any) => miscRegexSet.halfWidth.test(value)),
+    .max(200, validationMessageSet.maxLength)
+    .test('isHalfWidth', validationMessageSet.halfWidth, (value: any) => miscRegexSet.halfWidth.test(value)),
 
   // 企業名カナ
   clientNameFurigana: yup
@@ -33,8 +33,8 @@ export default yup.object().shape({
   streetAddress: yup
     .string()
     .required(validationMessageSet.required)
-    .max(140, validationMessageSet.maxLength),
-    // .test('isHalfWidth', validationMessageSet.halfWidth, (value: any) => miscRegexSet.halfWidth.test(value)),
+    .max(140, validationMessageSet.maxLength)
+    .test('isHalfWidth', validationMessageSet.halfWidth, (value: any) => miscRegexSet.halfWidth.test(value)),
 
   // 電話番号
   tel: yup
@@ -46,20 +46,20 @@ export default yup.object().shape({
   // 企業担当者：部署_就職担当者
   clientStaffDepartmentNameEmployment: yup
     .string()
-    .max(100, validationMessageSet.maxLength),
-    // .test('isHalfWidth', validationMessageSet.halfWidth, (value: any) => miscRegexSet.halfWidth.test(value)),
+    .max(100, validationMessageSet.maxLength)
+    .test('isHalfWidth', validationMessageSet.halfWidth, (value: any) => miscRegexSet.halfWidth.test(value)),
 
   // 企業担当者：役職_就職担当者
   clientStaffPositionNameEmployment: yup
     .string()
-    .max(50, validationMessageSet.maxLength),
-    // .test('isHalfWidth', validationMessageSet.halfWidth, (value: any) => miscRegexSet.halfWidth.test(value)),
+    .max(50, validationMessageSet.maxLength)
+    .test('isHalfWidth', validationMessageSet.halfWidth, (value: any) => miscRegexSet.halfWidth.test(value)),
 
   // 企業担当者：担当者名_就職担当者
   clientStaffNameEmployment: yup
     .string()
-    .max(100, validationMessageSet.maxLength),
-    // .test('isHalfWidth', validationMessageSet.halfWidth, (value: any) => miscRegexSet.halfWidth.test(value)),
+    .max(100, validationMessageSet.maxLength)
+    .test('isHalfWidth', validationMessageSet.halfWidth, (value: any) => miscRegexSet.halfWidth.test(value)),
 
   // 企業担当者：担当者名カナ_就職担当者
   clientStaffNameFuriganaEmployment: yup.lazy(value =>
@@ -80,10 +80,10 @@ export default yup.object().shape({
     :yup.mixed().notRequired()),
 
   // 営業担当者_就職担当者
-  // salesStaffEmployment: yup
-  //   .string()
-  //   .max(100, validationMessageSet.maxLength),
-    // .test('isHalfWidth', validationMessageSet.halfWidth, (value: any) => miscRegexSet.halfWidth.test(value)),
+  salesStaffEmployment: yup
+    .string()
+    .max(100, validationMessageSet.maxLength)
+    .test('isHalfWidth', validationMessageSet.halfWidth, (value: any) => miscRegexSet.halfWidth.test(value)),
 
   // 営業部署名_就職担当者
   salesDepartmentNameEmployment: yup
@@ -92,20 +92,20 @@ export default yup.object().shape({
   // 企業担当者：部署_転職担当者
   clientStaffDepartmentJobChange: yup
     .string()
-    .max(100, validationMessageSet.maxLength),
-    // .test('isHalfWidth', validationMessageSet.halfWidth, (value: any) => miscRegexSet.halfWidth.test(value)),
+    .max(100, validationMessageSet.maxLength)
+    .test('isHalfWidth', validationMessageSet.halfWidth, (value: any) => miscRegexSet.halfWidth.test(value)),
 
   // 企業担当者：役職_転職担当者
   clientStaffPositionJobChange: yup
     .string()
-    .max(50, validationMessageSet.maxLength),
-    // .test('isHalfWidth', validationMessageSet.halfWidth, (value: any) => miscRegexSet.halfWidth.test(value)),
+    .max(50, validationMessageSet.maxLength)
+    .test('isHalfWidth', validationMessageSet.halfWidth, (value: any) => miscRegexSet.halfWidth.test(value)),
 
   // 企業担当者：担当者名_転職担当者
   clientStaffNameJobChange: yup
     .string()
-    .max(100, validationMessageSet.maxLength),
-    // .test('isHalfWidth', validationMessageSet.halfWidth, (value: any) => miscRegexSet.halfWidth.test(value)),
+    .max(100, validationMessageSet.maxLength)
+    .test('isHalfWidth', validationMessageSet.halfWidth, (value: any) => miscRegexSet.halfWidth.test(value)),
 
   // 企業担当者：担当者名カナ_転職担当者
   clientStaffNameFuriganaJobChange: yup.lazy(value =>
@@ -126,10 +126,10 @@ export default yup.object().shape({
     :yup.mixed().notRequired()),
 
   // 営業担当者_転職担当者
-  // salesStaffJobChange: yup
-  //   .string()
-  //   .max(100, validationMessageSet.maxLength),
-    // .test('isHalfWidth', validationMessageSet.halfWidth, (value: any) => miscRegexSet.halfWidth.test(value)),
+  salesStaffJobChange: yup
+    .string()
+    .max(100, validationMessageSet.maxLength)
+    .test('isHalfWidth', validationMessageSet.halfWidth, (value: any) => miscRegexSet.halfWidth.test(value)),
 
   // 営業部署名_転職担当者
   salesDepartmentNameJobChange: yup
@@ -138,21 +138,21 @@ export default yup.object().shape({
   // 企業担当者：部署_Magi担当者
   clientStaffDepartmentMagi: yup
     .string()
-    .max(100, validationMessageSet.maxLength),
-    // .test('isHalfWidth', validationMessageSet.halfWidth, (value: any) => miscRegexSet.halfWidth.test(value)),
+    .max(100, validationMessageSet.maxLength)
+    .test('isHalfWidth', validationMessageSet.halfWidth, (value: any) => miscRegexSet.halfWidth.test(value)),
 
   // 企業担当者：役職_Magi担当者
   clientStaffPositionMagi: yup
     .string()
-    .max(50, validationMessageSet.maxLength),
-    // .test('isHalfWidth', validationMessageSet.halfWidth, (value: any) => miscRegexSet.halfWidth.test(value)),
+    .max(50, validationMessageSet.maxLength)
+    .test('isHalfWidth', validationMessageSet.halfWidth, (value: any) => miscRegexSet.halfWidth.test(value)),
 
   // 企業担当者：担当者名_Magi担当者
   clientStaffNameMagi: yup
     .string()
     .required(validationMessageSet.required)
-    .max(100, validationMessageSet.maxLength),
-    // .test('isHalfWidth', validationMessageSet.halfWidth, (value: any) => miscRegexSet.halfWidth.test(value)),
+    .max(100, validationMessageSet.maxLength)
+    .test('isHalfWidth', validationMessageSet.halfWidth, (value: any) => miscRegexSet.halfWidth.test(value)),
 
   // 企業担当者：担当者名カナ_Magi担当者
   clientStaffNameFuriganaMagi: yup.lazy(value =>
@@ -171,10 +171,10 @@ export default yup.object().shape({
     .email(validationMessageSet.email),
 
   // 営業担当者_Magi担当者
-  // salesStaffMagi: yup
-  //   .string()
-  //   .max(100, validationMessageSet.maxLength),
-    // .test('isHalfWidth', validationMessageSet.halfWidth, (value: any) => miscRegexSet.halfWidth.test(value)),
+  salesStaffMagi: yup
+    .string()
+    .max(100, validationMessageSet.maxLength)
+    .test('isHalfWidth', validationMessageSet.halfWidth, (value: any) => miscRegexSet.halfWidth.test(value)),
 
   // 営業部署名_Magi担当者
   salesDepartmentNameMagi: yup
@@ -193,6 +193,6 @@ export default yup.object().shape({
   // 備考
   remarks: yup
     .string()
-    .max(500, validationMessageSet.maxLength),
-    // .test('isHalfWidth', validationMessageSet.halfWidth, (value: any) => miscRegexSet.halfWidth.test(value)),
+    .max(500, validationMessageSet.maxLength)
+    .test('isHalfWidth', validationMessageSet.halfWidth, (value: any) => miscRegexSet.halfWidth.test(value)),
 });

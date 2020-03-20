@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { Link as RouterLink } from 'react-router-dom'
 import PerfectScrollbar from 'react-perfect-scrollbar'
 import { makeStyles } from '@material-ui/core/styles'
 import {
@@ -21,9 +20,8 @@ import {
 
 import { stableSort, getSorting, Order } from 'utils/misc'
 import EnhancedTableHead, { headCells } from './EnhancedTableHead'
-import { ApplicationList, loginMagiClientId } from 'reducers/applicationReducer'
+import { ApplicationList, loginMagiClientId, getApplicationDetail } from 'reducers/applicationReducer'
 import { Paginate } from 'components'
-import { routeList } from 'routes/routes'
 import { getMessage } from 'common/messageUtil'
 import { useDispatch } from 'react-redux'
 import { magiContants } from 'utils/contants'
@@ -82,7 +80,6 @@ const useStyles = makeStyles(theme => ({
   none: {},
   Normal: {
     alignItems: 'center',
-    // borderRadius: '12px',
     backgroundColor: '#97d077',
     display:'inline-flex',
     fiexBasis: '150px',
@@ -99,7 +96,6 @@ const useStyles = makeStyles(theme => ({
   },
   Employment: {
     alignItems: 'center',
-    // borderRadius: '12px',
     backgroundColor: '#ff8000',
     display:'inline-flex',
     fiexBasis: '150px',
@@ -116,7 +112,6 @@ const useStyles = makeStyles(theme => ({
   },
   JobChange: {
     alignItems: 'center', 
-    // borderRadius: '12px',
     backgroundColor: '#3399ff',
     display:'inline-flex',
     fiexBasis: '150px',
@@ -180,6 +175,9 @@ const Results = ({ applications, className }: Props) => {
   const handleChangePage = (data: any) => {
     setPage(data.selected)
   }
+  const linkClick = (data: any) => {
+    dispatch(getApplicationDetail(data.contractId))
+  }
 
   return (
     <div className={className}>
@@ -230,11 +228,7 @@ const Results = ({ applications, className }: Props) => {
                               {/* 申込IDラベルフラグの判断、0の場合、linkを実行する */}
                               {i.labelFlag === '0' ? (
                                 <Link
-                                  to={{
-                                    pathname: routeList.applicationDetail,
-                                    state: i[c.id],
-                                  }}
-                                  component={RouterLink}>
+                                  onClick={ () => linkClick(i)}>
                                   {i[c.id]}
                                 </Link>
                               ) : (

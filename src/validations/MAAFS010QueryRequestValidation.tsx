@@ -27,7 +27,10 @@ export default yup.object().shape(
     .test('isHalfWidth', validationMessageSet.halfWidth, (value: any) => miscRegexSet.halfWidth.test(value)),
 
   // 対象期間From（年月日）
-  usagePeriodFromYMD: yup.date().nullable(),
+  usagePeriodFromYMD: yup
+    .string()
+    .max(400, validationMessageSet.maxLength)
+    .test('isDate', validationMessageSet.date, (value: any) => miscRegexSet.date.test(value)),
 
   // 対象期間From（時）
   usagePeriodFromH: yup
@@ -36,10 +39,13 @@ export default yup.object().shape(
     .max(23, validationMessageSet.maxValue),
 
   // 対象期間To（年月日）
-  usagePeriodToYMD: yup.date().nullable(),
+  usagePeriodToYMD: yup
+    .string()
+    .max(400, validationMessageSet.maxLength)
+    .test('isDate', validationMessageSet.date, (value: any) => miscRegexSet.date.test(value)),
 
-    // 対象期間To（時）
-    usagePeriodToH: yup
+  // 対象期間To（時）
+  usagePeriodToH: yup
       .number()
       .min(0, validationMessageSet.minValue)
       .max(23, validationMessageSet.maxValue),

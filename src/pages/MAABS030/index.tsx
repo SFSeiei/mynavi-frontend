@@ -17,12 +17,13 @@ import { Page, Label } from 'components'
 import { routeList } from 'routes/routes'
 import { initialValues, itemList, textMap } from './formConfig'
 import history from 'utils/history'
-import { Checkbox,Toggle, TextField } from 'components'
+import { Checkbox, TextField } from 'components'
 import { useDispatch, useSelector } from 'react-redux'
 import { createAccount,getAccountCreateInit } from 'reducers/accountReducer'
 import { RootState } from 'reducers'
 import schemaList from 'validations/MAABS030CreateRequestValidation'
 import magiStyles from 'css/magiStyle'
+import { magiContants } from 'utils/contants'
 
 const AccountCreate = () => {
   const dispatch = useDispatch()
@@ -34,6 +35,7 @@ const AccountCreate = () => {
   const [account, setAccount] = useState<any>(null)
   const [type, setType] = useState<keyof typeof textMap>('create')
   const dataCreateInit = useSelector((state: RootState) => state.account.accountCreateInit)
+  const { permissions } = useSelector((state: RootState) => state.globalMenu)
   const backToHome = () => {
     history.push(routeList.account)
   }
@@ -89,11 +91,7 @@ const AccountCreate = () => {
                         <FastField
                           name={i.name}
                           label={i.label}
-                          component={
-                            i.name === 'status'
-                              ? Toggle
-                              : TextField
-                          }
+                          component={TextField}
                         />
                       </Grid>
                     </React.Fragment>
@@ -105,7 +103,8 @@ const AccountCreate = () => {
                       dataCreateInit
                       ?                         
                       <div>
-                     {dataCreateInit.authSystemFlag === '1'
+                     {dataCreateInit.authSystemFlag === '1' 
+                      && permissions.includes(magiContants.AUTHORITYID_10)
                       ? (
                       <FastField key={'authoritySystem'}
                       name={'authoritySystem'}
@@ -168,16 +167,16 @@ const AccountCreate = () => {
               </CardContent>
               <CardActions className={magiClasses.buttonGroup}>
                 <Button
-                  type='submit'
-                  variant='contained'
-                  className={magiClasses.confirmButton}>
-                  登録する
-                </Button>
-                <Button
                   className={magiClasses.cancel}
                   onClick={backToHome}
                   variant='contained'>
                   キャンセルする
+                </Button>
+                <Button
+                  type='submit'
+                  variant='contained'
+                  className={magiClasses.confirmButton}>
+                  登録する
                 </Button>
               </CardActions>
             </Form>

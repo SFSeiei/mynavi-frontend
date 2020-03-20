@@ -40,6 +40,7 @@ import { initialDetailValues } from '../pages/MAACS030/formConfig'
 
 function* searchSaga(action: ReturnType<typeof searchCompanyList>) {
   try {
+    yield put(setCompanyList([]));
     const data = yield call(searchRequest, action.payload);
     if(data.length === 0){
       yield put(openSnackbar(magiContants.MESSAGECODE_RESULT_NULL))
@@ -51,9 +52,8 @@ function* searchSaga(action: ReturnType<typeof searchCompanyList>) {
 }
 function* initialize(action: ReturnType<typeof companyInitialize>) {
   try {
-    const dataNewList = [] as any
     if (action.payload !== '企業情報一覧') {
-      yield put(setCompanyList(dataNewList));
+      yield put(setCompanyList([]));
       yield put(setCompanySearch(initialSeachData));
     }
   } catch (error) {
@@ -67,12 +67,16 @@ function* setSearchDate(action: ReturnType<typeof setCompanySearchDate>) {
 function* accountIssuanceSaga(action: ReturnType<typeof accountIssuance>) {
   try {
     yield call(accountIssuanceRequest, action.payload)
+    yield put(openSnackbar(magiContants.MESSAGECODE_MAACS010_002))
     const searchCondition: ReturnType<typeof getCompanySearchDate> = yield select(
       getCompanySearchDate
     )
+    yield put(setCompanyList([]));
     const data = yield call(searchRequest, searchCondition);
+    if(data.length === 0){
+      yield put(openSnackbar(magiContants.MESSAGECODE_RESULT_NULL))
+    }
     yield put(setCompanyList(data));
-    yield put(openSnackbar(magiContants.MESSAGECODE_MAACS010_002))
   } catch (error) {
     yield put(openSnackbar(error.message));
   }
@@ -81,12 +85,16 @@ function* accountIssuanceSaga(action: ReturnType<typeof accountIssuance>) {
 function* temporaryPasswordIssuanceSaga(action: ReturnType<typeof temporaryPasswordIssuance>) {
   try {
     yield call(temporaryPasswordIssuanceRequest, action.payload)
+    yield put(openSnackbar(magiContants.MESSAGECODE_MAACS010_001))
     const searchCondition: ReturnType<typeof getCompanySearchDate> = yield select(
       getCompanySearchDate
     ) 
+    yield put(setCompanyList([]));
     const data = yield call(searchRequest, searchCondition);
+    if(data.length === 0){
+      yield put(openSnackbar(magiContants.MESSAGECODE_RESULT_NULL))
+    }
     yield put(setCompanyList(data));
-    yield put(openSnackbar(magiContants.MESSAGECODE_MAACS010_001))
   } catch (error) {
     yield put(openSnackbar(error.message));
   }
@@ -102,6 +110,7 @@ function* searchAdmin() {
 
 function* selectCompanyAccountListSaga(action: ReturnType<typeof selectCompanyAccountList>) {
   try {
+    yield put(setCompanyAccountSearchResults([]))
     const data = yield call(selectRequest, action.payload);
     yield put(setCompanyAccountSearchResults(data));
     if(data.length === 0){
@@ -114,13 +123,16 @@ function* selectCompanyAccountListSaga(action: ReturnType<typeof selectCompanyAc
 
 function* setLoginIdSaga(action: ReturnType<typeof setLoginID>){
   try{
-    yield put(setCompanyAccountSearchResults([]))
     yield call(SetPasswordRequest, action.payload);
     yield put(openSnackbar(magiContants.MESSAGECODE_TEMPPW_CREATE_SUCCESS))
     const searchCondition: ReturnType<typeof getCompanyAccountSearchCondition> = yield select(
       getCompanyAccountSearchCondition
     )
+    yield put(setCompanyAccountSearchResults([]))
     const data = yield call(selectRequest, searchCondition);
+    if(data.length === 0){
+      yield put(openSnackbar(magiContants.MESSAGECODE_RESULT_NULL))
+    }
     yield put(setCompanyAccountSearchResults(data));
   }catch (error) {
     
@@ -136,7 +148,11 @@ function* createCompanySaga(action: ReturnType<typeof createCompany>){
     const searchCondition: ReturnType<typeof getCompanySearchDate> = yield select(
        getCompanySearchDate
     )
+    yield put(setCompanyList([]));
     const data = yield call(searchRequest, searchCondition);
+    if(data.length === 0){
+      yield put(openSnackbar(magiContants.MESSAGECODE_RESULT_NULL))
+    }
     yield put(setCompanyList(data));
   }catch (error) {
     yield put(openSnackbar(error.message))
@@ -162,10 +178,13 @@ function* updateCompanySaga(action: ReturnType<typeof updateCompany>){
     yield put(openSnackbar(magiContants.MESSAGECODE_UPDATE_SUCCESS))
     const searchCondition: ReturnType<typeof getCompanySearchDate> = yield select(
      getCompanySearchDate
-   )
+    )
+    yield put(setCompanyList([]));
     const data = yield call(searchRequest, searchCondition);
+    if(data.length === 0){
+      yield put(openSnackbar(magiContants.MESSAGECODE_RESULT_NULL))
+    }
     yield put(setCompanyList(data));
-
  }catch (error) {
    yield put(openSnackbar(error.message))
  }
@@ -185,6 +204,7 @@ function* initCompany() {
     yield call(initializeRequest)
     history.push(routeList.company)
   } catch (error) {
+    yield put(openSnackbar(error.message));
   }
 }
 export default function* companyaga() {

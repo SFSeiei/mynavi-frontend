@@ -7,11 +7,14 @@ import {
   takeEvery,
 } from 'redux-saga/effects'
 import {
+  accountInitialize,
+  initializeAccount,
   getAccountDetail,
   setAccountDetail,
   getAccountCreateInit,
   setAccountCreateInit,
   selectAccountList,
+  setAccountListSearchCondition,
   setAccountListResults,
   updateByValid,
   updateByInValid,
@@ -24,16 +27,20 @@ import {
   updateAccount,
   updatePassword,
   updatePasswordSuccess,
+  getSysVersionNumberInit,
+  setSysVersionNumberInit,
 } from 'reducers/accountReducer'
 import { openSnackbar, openModal } from 'reducers/messageReducer'
-import { getAccountListSearchCondition } from 'selectors';
+import { initialValues } from '../pages/MAABS020/formConfig'
+import { getAccountListSearchCondition } from 'selectors'
 import {
   selectRequest,
   updateByValidRequest,
   updateByInValidRequest,
   inValidCheckRequest,
   updateByPasswordRequest,
-  fetchRequest
+  fetchRequest,
+  initializeRequest,
 } from 'apis/MAABS020Api'
 import {
   createInit,
@@ -48,6 +55,7 @@ import {
 } from 'reducers/loginReducer'
 import {
   updatePasswordRequest,
+  initSysVersionNumber
 } from 'apis/MAABS010Api'
 import { magiContants } from 'utils/contants';
 import history from 'utils/history'
@@ -57,17 +65,21 @@ function* detailSaga(action: ReturnType<typeof getAccountDetail>) {
   try {
     const data = yield call(detailRequest, action.payload)
     yield put(setAccountDetail(data));
-    history.push(routeList.accountEdit)
+    const path = {
+      pathname: routeList.accountEdit,
+      state: action.payload,
+    }
+    history.push(path)
   } catch (error) {
-    yield put(openSnackbar(error.message));
+    yield put(openModal(error.message));
   }
 }
-
 
 function* creatSagaInit() {
   try {
     const data = yield call(createInit)
     yield put(setAccountCreateInit(data));
+    history.push(routeList.accountCreate)
   } catch (error) {
     yield put(openSnackbar(error.message));
   }
@@ -88,14 +100,17 @@ function* selectAccoutListSaga(action: ReturnType<typeof selectAccountList>) {
 
 function* updateByValidSaga(action: ReturnType<typeof updateByValid>) {
   try {
-    yield put(setAccountListResults([]));
     yield call(updateByValidRequest, action.payload.data);
+    yield put(openSnackbar(magiContants.MESSAGECODE_UPDATE_SUCCESS))
     const searchCondition: ReturnType<typeof getAccountListSearchCondition> = yield select(
       getAccountListSearchCondition
     )
+    yield put(setAccountListResults([]));
     const data = yield call(selectRequest, searchCondition);
+    if(data.length === 0){
+      yield put(openSnackbar(magiContants.MESSAGECODE_RESULT_NULL))
+    } 
     yield put(setAccountListResults(data));
-    yield put(openSnackbar(magiContants.MESSAGECODE_UPDATE_SUCCESS))
   } catch (error) {
     yield put(openModal(error.message));
   }
@@ -103,14 +118,17 @@ function* updateByValidSaga(action: ReturnType<typeof updateByValid>) {
 
 function* updateByInValidSaga(action: ReturnType<typeof updateByInValid>) {
   try {
-    yield put(setAccountListResults([]));
     yield call(updateByInValidRequest, action.payload.data);
+    yield put(openSnackbar(magiContants.MESSAGECODE_UPDATE_SUCCESS))
     const searchCondition: ReturnType<typeof getAccountListSearchCondition> = yield select(
       getAccountListSearchCondition
     )
+    yield put(setAccountListResults([]));
     const data = yield call(selectRequest, searchCondition);
+    if(data.length === 0){
+      yield put(openSnackbar(magiContants.MESSAGECODE_RESULT_NULL))
+    }
     yield put(setAccountListResults(data));
-    yield put(openSnackbar(magiContants.MESSAGECODE_UPDATE_SUCCESS))
   } catch (error) {
     yield put(openModal(error.message));
   }
@@ -128,14 +146,17 @@ function* inValidCheckSaga(action: ReturnType<typeof inValidCheck>){
 
 function* updateByPasswordSaga(action: ReturnType<typeof updateByPassword>) {
   try {
-    yield put(setAccountListResults([]));
     yield call(updateByPasswordRequest, action.payload.data);
+    yield put(openSnackbar(magiContants.MESSAGECODE_UPDATE_SUCCESS))
     const searchCondition: ReturnType<typeof getAccountListSearchCondition> = yield select(
       getAccountListSearchCondition
     )
+    yield put(setAccountListResults([]));
     const data = yield call(selectRequest, searchCondition);
+    if(data.length === 0){
+      yield put(openSnackbar(magiContants.MESSAGECODE_RESULT_NULL))
+    }
     yield put(setAccountListResults(data));
-    yield put(openSnackbar(magiContants.MESSAGECODE_UPDATE_SUCCESS))
   } catch (error) {
     yield put(openSnackbar(error.message));
   }
@@ -174,10 +195,12 @@ function* updateSaga(action: ReturnType<typeof updateAccount>) {
     const searchCondition: ReturnType<typeof getAccountListSearchCondition> = yield select(
       getAccountListSearchCondition
     )
+    yield put(setAccountListResults([]));
     const result = yield call(selectRequest, searchCondition);
+    if(result.length === 0){
+      yield put(openSnackbar(magiContants.MESSAGECODE_RESULT_NULL))
+    }
     yield put(setAccountListResults(result));
-
-    
   } catch (error) {
     yield put(openModal(error.message))
   }
@@ -191,7 +214,6 @@ function* updatePasswordSaga(action: ReturnType<typeof updatePassword>) {
       const token = data.tokenHead + ' ' + data.token
       yield put(loginSuccess({ token }))
     }
-
     yield put(updatePasswordSuccess())
     yield put(openSnackbar(magiContants.MESSAGECODE_UPDATE_SUCCESS))
   } catch (error) {
@@ -199,6 +221,34 @@ function* updatePasswordSaga(action: ReturnType<typeof updatePassword>) {
   }
 }
 
+function* initialize(action: ReturnType<typeof accountInitialize>) {
+  try {
+    const dataNewList = [] as any
+    if (action.payload !== 'アカウント一覧') {
+      yield put(setAccountListResults(dataNewList));
+      yield put(setAccountListSearchCondition(initialValues));
+    }
+  } catch (error) {
+    yield put(openSnackbar(error.message))
+  }
+}
+function* initAccount() {
+  try {
+    yield call(initializeRequest)
+    history.push(routeList.account)
+  } catch (error) {
+    yield put(openSnackbar(error.message));
+  }
+}
+function* getSysVersionNumberSage(){
+  try{
+    const data = yield call(initSysVersionNumber)
+    yield put(setSysVersionNumberInit(data))
+  }
+  catch(error){
+    yield put(openModal(error.message))
+  }
+}
 export default function* accountSaga() {
   yield all([
     takeEvery(getAccountDetail, detailSaga),
@@ -212,5 +262,8 @@ export default function* accountSaga() {
     takeLatest(fetchAccoutList, fetchSaga),
     takeEvery(createAccount, createSaga),
     takeEvery(updatePassword, updatePasswordSaga),
+    takeLatest(initializeAccount, initAccount),
+    takeEvery(accountInitialize, initialize),
+    takeEvery(getSysVersionNumberInit, getSysVersionNumberSage),
   ])
 }

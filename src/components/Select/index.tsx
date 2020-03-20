@@ -1,6 +1,7 @@
 import React, { CSSProperties, HTMLAttributes,useState } from 'react'
 import clsx from 'clsx'
 import { FormControl } from '@material-ui/core'
+import { useErrorStyle } from 'components'
 import { FieldProps } from 'formik';
 import {
   createStyles,
@@ -216,13 +217,15 @@ interface Props extends FieldProps {
 }
 export function IntegrationReactSelect({ field, form, options }: Props) {
   const [departmentName, setDepartmentName] = useState('')
+  const { errors, touched } = form
   const {name} = field
   const handleChange = (e: any) => {
-    form.setFieldValue(name, e.value)
-    form.setFieldValue('salesStaffName', e.label)
+    form.setFieldValue(name, e.label)
+    form.setFieldValue('adminId', e.value)
     setDepartmentName(e.departmentName)
   }
   const classes = useStyles()
+  const errorclasses = useErrorStyle()
   const theme = useTheme()
 
   const selectStyles = {
@@ -255,6 +258,9 @@ export function IntegrationReactSelect({ field, form, options }: Props) {
         </Typography>
       </div>
     </div>
+    {errors[name] && touched[name] ? (
+        <p className={errorclasses.helperText}>{errors[name]}</p>
+      ) : null}
   </FormControl> 
   )
 }

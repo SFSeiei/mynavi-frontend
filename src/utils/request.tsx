@@ -35,11 +35,11 @@ service.interceptors.response.use(
       }
       if (code === 500) {
         // catched by ErrorBoundary to show 500 page
-        history.push(routeList.errorBoundary)
+        throw new Error('Server Internal Error')
       }
-      // if (code === 404) {
-      //   history.push(routeList.unauthorized)
-      // }
+      if (code === 404) {
+        history.push(routeList.unauthorized)
+      }
       return Promise.reject({ message })
     } else {
       return data
