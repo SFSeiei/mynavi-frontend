@@ -1,0 +1,52 @@
+# 役割
+
+Saga の役割は以下の通り。
+
+- 非同期 Action（AJAX 呼び出し、タイムアウト、プロミス）を処理する
+
+# サンプルコード
+
+Saga のサンプルを以下に示す。
+
+```js
+function* fetchSaga() {
+  try {
+    const { data }: Response = yield call(fetchRequest)
+    yield put(setAccount(data.data))
+  } catch (error) {
+    yield put(openSnackbar(error.message))
+  }
+}
+
+function* createSaga(action: ReturnType<typeof createAccount>) {
+  try {
+    const { data } = yield call(createRequest, action.payload);
+    const accountList: ReturnType<typeof getAccountList> = yield select(
+      getAccountList,
+    );
+    yield put(
+      setAccount([...accountList, { ...data.data, ...action.payload }] as any),
+    );
+    yield put(openSnackbar('登録しました'));
+  } catch (error) {
+    yield put(openSnackbar(error.message));
+  }
+}
+
+export default function* accountSaga() {
+  yield all([
+    takeLatest(fetchAccoutList, fetchSaga),
+    takeEvery(createAccount, createSaga),
+  ])
+}
+```
+
+- `takeLatest(fetchAccoutList, fetchSaga)`: 関数`fetchSaga`を呼び出して、最新の`fetchAccountList`Action のみを処理します。
+- `takeEvery(createAccount, createSaga)`: 関数`createSaga`を呼び出して、すべての`createAccount`Action を処理する
+
+# 規則
+
+Saga の記載ルールを以下に示す。
+
+- Saga と非同期 Action のマッピングについて: デフォルトのエクスポート関数で、Saga と Action のマッピングを定義する。すべての Action を処理する場合は、`takeEvery`を使用する。ただし、最新の Action のみを処理する場合は、`takeLatest`を使用する。
+- エクスポートについて:`xxxSaga`をデフォルトのエクスポートとして定義する。そして、`sagas/index.tsx`に`xxxSaga`としてインポートして、`all`の引数配列に追加する。

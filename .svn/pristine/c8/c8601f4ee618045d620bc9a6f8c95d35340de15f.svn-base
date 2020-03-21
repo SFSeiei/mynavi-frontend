@@ -1,0 +1,6 @@
+0000000000000000000000000000000000000000 879af5d4fd97482f3e794db3bbf8a7813dc44bf0 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1576804497 +0900	branch: Created from 879af5d4fd974
+879af5d4fd97482f3e794db3bbf8a7813dc44bf0 c37fa51ab587c7a64cf2f440511dea28fc163ac8 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1577145209 +0900	commit: fix for demo
+c37fa51ab587c7a64cf2f440511dea28fc163ac8 773c66760e14a76aebe4ae669a6fa5a6cf8c3466 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1577148349 +0900	commit: remove sort from table
+773c66760e14a76aebe4ae669a6fa5a6cf8c3466 2316f9cb8f70001b6d46ccb4f9a9be08e6f0211a Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1577151598 +0900	commit: update table header
+2316f9cb8f70001b6d46ccb4f9a9be08e6f0211a 506bd29a6c661be832cb6a985f0097b6f9c66c0e Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1577161121 +0900	commit: replace select all checkbox
+506bd29a6c661be832cb6a985f0097b6f9c66c0e 0e498c2535c6a13828ec26d91a93f36fb02914d2 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1577162265 +0900	commit: update placeholder

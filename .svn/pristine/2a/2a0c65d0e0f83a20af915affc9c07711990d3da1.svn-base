@@ -1,0 +1,7 @@
+0000000000000000000000000000000000000000 86a9337248776c678b6d781cbae2a0a2dc22901f Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1577246837 +0900	branch: Created from HEAD
+86a9337248776c678b6d781cbae2a0a2dc22901f 86a9337248776c678b6d781cbae2a0a2dc22901f Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1577247187 +0900	Branch: renamed refs/heads/error-reducer to refs/heads/api-error-reducer
+86a9337248776c678b6d781cbae2a0a2dc22901f d302b15b4fc3323f520c97d53fee251d7d7008d5 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1577249309 +0900	commit: update vscode settings for javascript
+d302b15b4fc3323f520c97d53fee251d7d7008d5 fd21146197aa6170b2ed693e34cd66813fce5c45 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1577256667 +0900	commit: add useScroll hook
+fd21146197aa6170b2ed693e34cd66813fce5c45 83d5a55a4b8589af023499d6114a0b829f4f47ce Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1577262891 +0900	commit: add error message stories
+83d5a55a4b8589af023499d6114a0b829f4f47ce 8bd178c0ee95973c6435a55aec014f87129b3225 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1577324800 +0900	commit: update snackbar reducer for dealing with more type of errors
+8bd178c0ee95973c6435a55aec014f87129b3225 8bd178c0ee95973c6435a55aec014f87129b3225 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1577325206 +0900	Branch: renamed refs/heads/api-error-reducer to refs/heads/#1-error-message

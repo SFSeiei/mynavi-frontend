@@ -1,0 +1,4 @@
+HOST=0.0.0.0
+REACT_APP_WEBSITE_NAME="Magi 管理画面"
+REACT_APP_BASE_URL="http://localhost:8080";
+SKIP_PREFLIGHT_CHECK=true

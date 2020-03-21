@@ -1,0 +1,16 @@
+0000000000000000000000000000000000000000 dde313730e0df92eb06cf5c110940a140b0cd72e Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1569372433 +0900	commit (initial): Initial commit from Create React App
+dde313730e0df92eb06cf5c110940a140b0cd72e 463962ac7e5bf517cfd7bf002a56c9b9343b5ec8 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1569373583 +0900	commit: Init
+463962ac7e5bf517cfd7bf002a56c9b9343b5ec8 eb3c2336f04d5af06c7f7d8d4da856b049cee259 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1569376698 +0900	commit: setup router
+eb3c2336f04d5af06c7f7d8d4da856b049cee259 e5f34b525acfaed9efa7b064b2c4de10df861938 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1569394118 +0900	commit: setup mock api and ui
+e5f34b525acfaed9efa7b064b2c4de10df861938 ce3f1c78ca8c33d0b2c8309abbad68ff5ba48807 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1569456250 +0900	commit: add formik
+ce3f1c78ca8c33d0b2c8309abbad68ff5ba48807 651a3d5912dda4b016e014e2167e025f024e6700 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1569476884 +0900	merge field-array: Fast-forward
+651a3d5912dda4b016e014e2167e025f024e6700 59a66c54fbe83bd99318471f27e5259829bdd076 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1569828139 +0900	commit: setup redux
+59a66c54fbe83bd99318471f27e5259829bdd076 e32d2d1c92154f855d12aa6eef88bb36c06139e1 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1569892671 +0900	commit: move from redux-observable to redux-saga
+e32d2d1c92154f855d12aa6eef88bb36c06139e1 7ecff0b68b031761e7219084827463e146308f73 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1569894561 +0900	commit: fix update action
+7ecff0b68b031761e7219084827463e146308f73 cd4cb01e9da6786e2535efa08aa7e5ed4000b10c Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1569919188 +0900	commit: setup for demo
+cd4cb01e9da6786e2535efa08aa7e5ed4000b10c 3ee588b1931be493359cc4834b4926700835275c Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1570004457 +0900	commit: add permission support
+3ee588b1931be493359cc4834b4926700835275c 9e50a69e24cea5f54e9706d16201a91e5deffa4e Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1570686789 +0900	commit: setup for test
+9e50a69e24cea5f54e9706d16201a91e5deffa4e a56aed986fe38747e8c889b387928272d5a1e224 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1573004493 +0900	merge modal: Fast-forward
+a56aed986fe38747e8c889b387928272d5a1e224 c31c4ff631151f3d56d2e1c73b252c5a78d37158 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1574747970 +0900	merge navbar: Fast-forward
+c31c4ff631151f3d56d2e1c73b252c5a78d37158 0a877f206f9b5c7b61f059e47073166875b4e961 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1576140014 +0900	merge animation: Fast-forward
+0a877f206f9b5c7b61f059e47073166875b4e961 86a9337248776c678b6d781cbae2a0a2dc22901f Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1576801005 +0900	commit: add tailwind

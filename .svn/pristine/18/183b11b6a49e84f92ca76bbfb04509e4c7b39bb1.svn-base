@@ -1,0 +1,61 @@
+# 役割
+
+Reducer の役割は以下の通り。
+
+- Action Creator を自動生成する (Action Creator は、Action を作成する関数です)
+- State の一部状態をデザインする
+- Action をハンドリングする
+
+# サンプルコード
+
+Reducer のサンプルを以下に示す。
+
+```js
+const initialState: Account[] = []
+
+const accountSlice = createSlice({
+  slice: 'accout',
+  initialState,
+  reducers: {
+    fetchAccoutList(state) {
+      return state
+    },
+    setAccount(state, action: PayloadAction<Account[]>) {
+      return action.payload
+    },
+    createAccount(state, action: PayloadAction<AccountDto>) {
+      return state
+    },
+    updateAccount(
+      state,
+      action: PayloadAction<{ data: AccountDto, message: string }>
+    ) {
+      return state
+    },
+    deleteAccount(state, action: PayloadAction<string>) {
+      return state
+    },
+  },
+})
+
+export const {
+  fetchAccoutList,
+  setAccount,
+  createAccount,
+  updateAccount,
+  deleteAccount,
+} = accountSlice.actions
+```
+
+- `initialState,`と`initialState: initialState,`は同じです
+
+# 規則
+
+Reducer の記載ルールを以下に示す。
+
+- `slice`プロパティについて: 機能カテゴリー ID を`slice`プロパティの値を定義する。
+- `initialState`プロパティについて: この Reducer が定義した State の一部状態の初期値を`initialState`プロパティの値を定義する。
+- `reducer`プロパティに定義された関数について: この機能カテゴリーに関連する Action 処理は`reducer`プロパティの値に定義する。すべての非同期 Action 処理は State のみ返して、非同期 Action は Saga で処理される。
+- エクスポートについて:
+  - `xxxSlice.actions`によって自動生成されたすべての Action Creators をエクスポートする。
+  - `xxxSlice.reducer`をデフォルトのエクスポートとして定義する。そして、`reducers/index.tsx`に`xxxReducer`としてインポートして、`combineReducer`の引数オブジェクトに追加する。

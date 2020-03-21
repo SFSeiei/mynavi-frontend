@@ -1,0 +1,95 @@
+0000000000000000000000000000000000000000 dde313730e0df92eb06cf5c110940a140b0cd72e Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1569372433 +0900	commit (initial): Initial commit from Create React App
+dde313730e0df92eb06cf5c110940a140b0cd72e 463962ac7e5bf517cfd7bf002a56c9b9343b5ec8 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1569373583 +0900	commit: Init
+463962ac7e5bf517cfd7bf002a56c9b9343b5ec8 eb3c2336f04d5af06c7f7d8d4da856b049cee259 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1569376698 +0900	commit: setup router
+eb3c2336f04d5af06c7f7d8d4da856b049cee259 e5f34b525acfaed9efa7b064b2c4de10df861938 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1569394118 +0900	commit: setup mock api and ui
+e5f34b525acfaed9efa7b064b2c4de10df861938 ce3f1c78ca8c33d0b2c8309abbad68ff5ba48807 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1569456250 +0900	commit: add formik
+ce3f1c78ca8c33d0b2c8309abbad68ff5ba48807 ce3f1c78ca8c33d0b2c8309abbad68ff5ba48807 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1569456857 +0900	checkout: moving from master to field-array
+ce3f1c78ca8c33d0b2c8309abbad68ff5ba48807 dac00f6a2df654594d5550223234426e1c6f4103 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1569462967 +0900	commit: add field array component
+dac00f6a2df654594d5550223234426e1c6f4103 6114a548a56f20b2ab9411aa4a02ddc01629f160 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1569476532 +0900	commit: finish frontend for account list page
+6114a548a56f20b2ab9411aa4a02ddc01629f160 651a3d5912dda4b016e014e2167e025f024e6700 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1569476859 +0900	commit: minor fix
+651a3d5912dda4b016e014e2167e025f024e6700 ce3f1c78ca8c33d0b2c8309abbad68ff5ba48807 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1569476871 +0900	checkout: moving from field-array to master
+ce3f1c78ca8c33d0b2c8309abbad68ff5ba48807 651a3d5912dda4b016e014e2167e025f024e6700 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1569476884 +0900	merge field-array: Fast-forward
+651a3d5912dda4b016e014e2167e025f024e6700 59a66c54fbe83bd99318471f27e5259829bdd076 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1569828139 +0900	commit: setup redux
+59a66c54fbe83bd99318471f27e5259829bdd076 e32d2d1c92154f855d12aa6eef88bb36c06139e1 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1569892671 +0900	commit: move from redux-observable to redux-saga
+e32d2d1c92154f855d12aa6eef88bb36c06139e1 7ecff0b68b031761e7219084827463e146308f73 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1569894561 +0900	commit: fix update action
+7ecff0b68b031761e7219084827463e146308f73 cd4cb01e9da6786e2535efa08aa7e5ed4000b10c Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1569919188 +0900	commit: setup for demo
+cd4cb01e9da6786e2535efa08aa7e5ed4000b10c 3ee588b1931be493359cc4834b4926700835275c Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1570004457 +0900	commit: add permission support
+3ee588b1931be493359cc4834b4926700835275c 9e50a69e24cea5f54e9706d16201a91e5deffa4e Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1570686789 +0900	commit: setup for test
+9e50a69e24cea5f54e9706d16201a91e5deffa4e 9e50a69e24cea5f54e9706d16201a91e5deffa4e Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1570686800 +0900	checkout: moving from master to modal
+9e50a69e24cea5f54e9706d16201a91e5deffa4e a6290a45d9e91bee84573a44516da4c4d00437b4 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1570688630 +0900	commit: setup account modal
+a6290a45d9e91bee84573a44516da4c4d00437b4 4824a3e58c6401ec2d01265e55654b2f0ac17d7f Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1570691458 +0900	commit: fix bugs for modal
+4824a3e58c6401ec2d01265e55654b2f0ac17d7f fde77aad51d5c8628b8e3235b062ca1ea894459e Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1570697596 +0900	commit: add support for double modal
+fde77aad51d5c8628b8e3235b062ca1ea894459e 6550c13cece90b3ef85783e36fec18c90697494a Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1571106440 +0900	commit: setup multi modals demo
+6550c13cece90b3ef85783e36fec18c90697494a 82d827d2194cfe5e968f6daae2b5251bd1036430 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1571271304 +0900	commit: setup authentication
+82d827d2194cfe5e968f6daae2b5251bd1036430 a932ee13fd535d2622e63674ad56eac6f43806c5 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1571272008 +0900	commit: add 404 and redirect page
+a932ee13fd535d2622e63674ad56eac6f43806c5 223240d301163ff23e02eefbde2b3e092bed872b Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1571276996 +0900	commit: setup nav bar
+223240d301163ff23e02eefbde2b3e092bed872b c938a49ccbf2aa8fe81818d6048ad65f13005d17 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1571291004 +0900	commit: add authorization
+c938a49ccbf2aa8fe81818d6048ad65f13005d17 a9cc395df43f058a848f29255335e94bfccbbe5d Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1571292169 +0900	commit: update nav bar items for authorization
+a9cc395df43f058a848f29255335e94bfccbbe5d e09cb684993184554cd11dcb94f9438d92693787 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1571899804 +0900	commit: add error report feature
+e09cb684993184554cd11dcb94f9438d92693787 8864f4235a4474805d4972cc4be5afc7df3488eb Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1572251924 +0900	commit: setup upload component
+8864f4235a4474805d4972cc4be5afc7df3488eb 3e5f51707d6511db592bad7005ca6d018401a76d Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1572316533 +0900	commit: add upload api
+3e5f51707d6511db592bad7005ca6d018401a76d 65319226ecc7a03b0b1332a2200dfd4eb240e0ee Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1572321934 +0900	commit: add a progress bar when uploading
+65319226ecc7a03b0b1332a2200dfd4eb240e0ee a56aed986fe38747e8c889b387928272d5a1e224 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1573004466 +0900	commit: update stories
+a56aed986fe38747e8c889b387928272d5a1e224 9e50a69e24cea5f54e9706d16201a91e5deffa4e Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1573004488 +0900	checkout: moving from modal to master
+9e50a69e24cea5f54e9706d16201a91e5deffa4e a56aed986fe38747e8c889b387928272d5a1e224 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1573004493 +0900	merge modal: Fast-forward
+a56aed986fe38747e8c889b387928272d5a1e224 a56aed986fe38747e8c889b387928272d5a1e224 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1573004515 +0900	checkout: moving from master to react-hook-form
+a56aed986fe38747e8c889b387928272d5a1e224 0000000000000000000000000000000000000000 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1573006792 +0900	Branch: renamed refs/heads/react-hook-form to refs/heads/devops-script
+0000000000000000000000000000000000000000 a56aed986fe38747e8c889b387928272d5a1e224 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1573006792 +0900	Branch: renamed refs/heads/react-hook-form to refs/heads/devops-script
+a56aed986fe38747e8c889b387928272d5a1e224 c86fe4e77291d0b963d0233b19a443e65642efbe Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1573024702 +0900	commit: update request params
+c86fe4e77291d0b963d0233b19a443e65642efbe c24c121bbc4da51c17b7299dd4080344913943f6 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1573026573 +0900	commit: add script for docker compose
+c24c121bbc4da51c17b7299dd4080344913943f6 6cefa8675256b85111658b6154af2bd9641e8cba Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1573090801 +0900	commit: add delete action
+6cefa8675256b85111658b6154af2bd9641e8cba 804632033d3a72501bf1b6cc5e79ba439c05ac26 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1573100563 +0900	commit: fix front end point
+804632033d3a72501bf1b6cc5e79ba439c05ac26 b3c2ded4093eda143c2d988f5ec4a0ae65d95044 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1573191508 +0900	commit: add a component for resetting scroll position
+b3c2ded4093eda143c2d988f5ec4a0ae65d95044 82656eef3a09b48f664509117dd2ec063ceacf9d Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1573193499 +0900	commit: replace formik with react-hook-form for login page
+82656eef3a09b48f664509117dd2ec063ceacf9d 69859890b8bc0677ec6172a0f754608d2060f415 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1573196740 +0900	commit: add custom components for react-hook-form
+69859890b8bc0677ec6172a0f754608d2060f415 96c3fbb2d8aaf8cb9544ceb543622217fbae5f40 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1573450567 +0900	commit: update button color
+96c3fbb2d8aaf8cb9544ceb543622217fbae5f40 38bafd2918b057c50e4451c9c016bdd5b658a7c6 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1573456153 +0900	commit: add label on the left side of text field
+38bafd2918b057c50e4451c9c016bdd5b658a7c6 6857bbfc14fb0f1fc55e61b7eb7289ebc6f5aa71 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1573457211 +0900	commit: add sub title component
+6857bbfc14fb0f1fc55e61b7eb7289ebc6f5aa71 41978c6ac94444c05fb2712ef1a7a33c188480d2 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1573461432 +0900	commit: update paginate component on table
+41978c6ac94444c05fb2712ef1a7a33c188480d2 1c1cf02c6b3438b231c0bc1697da686d3f79cf38 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1573523257 +0900	commit: update layout
+1c1cf02c6b3438b231c0bc1697da686d3f79cf38 a00fce32ae40c1a09b637ab349c41891234897cf Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1573532509 +0900	commit: refactor components
+a00fce32ae40c1a09b637ab349c41891234897cf 63acf5c8ae5bcc312bbf4f9de186548cd7cd7460 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1573534057 +0900	commit: minor fix for demo
+63acf5c8ae5bcc312bbf4f9de186548cd7cd7460 751c113146b247f899eef0e000c889e54819f371 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1573698832 +0900	commit: add web font to local
+751c113146b247f899eef0e000c889e54819f371 b8a5b1558786287747270deeb5d0896db093898e Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1574142692 +0900	commit: update header and add a footer for copyright
+b8a5b1558786287747270deeb5d0896db093898e b8a5b1558786287747270deeb5d0896db093898e Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1574147045 +0900	checkout: moving from devops-script to navbar
+b8a5b1558786287747270deeb5d0896db093898e 1e7cda9622b1af7ebe761fa4df0845ea00ae17cd Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1574151537 +0900	commit: setup components for updating account password
+1e7cda9622b1af7ebe761fa4df0845ea00ae17cd 879af5d4fd97482f3e794db3bbf8a7813dc44bf0 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1574217671 +0900	commit: setup api request for updating account password
+879af5d4fd97482f3e794db3bbf8a7813dc44bf0 c31c4ff631151f3d56d2e1c73b252c5a78d37158 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1574747944 +0900	commit: move data transform logic into interceptors
+c31c4ff631151f3d56d2e1c73b252c5a78d37158 a56aed986fe38747e8c889b387928272d5a1e224 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1574747962 +0900	checkout: moving from navbar to master
+a56aed986fe38747e8c889b387928272d5a1e224 c31c4ff631151f3d56d2e1c73b252c5a78d37158 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1574747970 +0900	merge navbar: Fast-forward
+c31c4ff631151f3d56d2e1c73b252c5a78d37158 c31c4ff631151f3d56d2e1c73b252c5a78d37158 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1574747990 +0900	checkout: moving from master to animation
+c31c4ff631151f3d56d2e1c73b252c5a78d37158 3d95b064505be1c3bd95f28e7b351f72d78b907c Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1574756494 +0900	commit: add animation story
+3d95b064505be1c3bd95f28e7b351f72d78b907c 19cffcb31b26175545ef195c03661cf539f1209e Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1574991766 +0900	commit: add i18n
+19cffcb31b26175545ef195c03661cf539f1209e be392ded8bf8e85e5459c83e141162e7516ae716 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1574992879 +0900	commit: dynamic loading i18n files
+be392ded8bf8e85e5459c83e141162e7516ae716 ca20996c02a6c4ad5dc986536679d541b19512db Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1575592887 +0900	commit: delete unused files
+ca20996c02a6c4ad5dc986536679d541b19512db c80fb9b414741d0d141863f8ccab0e57fca99e10 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1575592980 +0900	commit: add story for react-beautiful-dnd
+c80fb9b414741d0d141863f8ccab0e57fca99e10 0a877f206f9b5c7b61f059e47073166875b4e961 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1576118168 +0900	commit: update folder structure for marcos
+0a877f206f9b5c7b61f059e47073166875b4e961 c31c4ff631151f3d56d2e1c73b252c5a78d37158 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1576140006 +0900	checkout: moving from animation to master
+c31c4ff631151f3d56d2e1c73b252c5a78d37158 0a877f206f9b5c7b61f059e47073166875b4e961 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1576140014 +0900	merge animation: Fast-forward
+0a877f206f9b5c7b61f059e47073166875b4e961 86a9337248776c678b6d781cbae2a0a2dc22901f Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1576801005 +0900	commit: add tailwind
+86a9337248776c678b6d781cbae2a0a2dc22901f 86a9337248776c678b6d781cbae2a0a2dc22901f Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1576801092 +0900	checkout: moving from master to auto
+86a9337248776c678b6d781cbae2a0a2dc22901f 86a9337248776c678b6d781cbae2a0a2dc22901f Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1576802716 +0900	checkout: moving from auto to master
+86a9337248776c678b6d781cbae2a0a2dc22901f ca20996c02a6c4ad5dc986536679d541b19512db Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1576802726 +0900	checkout: moving from master to demo
+ca20996c02a6c4ad5dc986536679d541b19512db 86a9337248776c678b6d781cbae2a0a2dc22901f Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1576802849 +0900	checkout: moving from demo to master
+86a9337248776c678b6d781cbae2a0a2dc22901f 3d95b064505be1c3bd95f28e7b351f72d78b907c Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1576802874 +0900	checkout: moving from master to demo
+3d95b064505be1c3bd95f28e7b351f72d78b907c 86a9337248776c678b6d781cbae2a0a2dc22901f Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1576803243 +0900	checkout: moving from demo to master
+86a9337248776c678b6d781cbae2a0a2dc22901f 879af5d4fd97482f3e794db3bbf8a7813dc44bf0 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1576803350 +0900	checkout: moving from master to demo
+879af5d4fd97482f3e794db3bbf8a7813dc44bf0 86a9337248776c678b6d781cbae2a0a2dc22901f Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1576804219 +0900	checkout: moving from demo to master
+86a9337248776c678b6d781cbae2a0a2dc22901f 879af5d4fd97482f3e794db3bbf8a7813dc44bf0 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1576804497 +0900	checkout: moving from master to demo
+879af5d4fd97482f3e794db3bbf8a7813dc44bf0 c37fa51ab587c7a64cf2f440511dea28fc163ac8 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1577145209 +0900	commit: fix for demo
+c37fa51ab587c7a64cf2f440511dea28fc163ac8 773c66760e14a76aebe4ae669a6fa5a6cf8c3466 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1577148349 +0900	commit: remove sort from table
+773c66760e14a76aebe4ae669a6fa5a6cf8c3466 2316f9cb8f70001b6d46ccb4f9a9be08e6f0211a Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1577151598 +0900	commit: update table header
+2316f9cb8f70001b6d46ccb4f9a9be08e6f0211a 506bd29a6c661be832cb6a985f0097b6f9c66c0e Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1577161121 +0900	commit: replace select all checkbox
+506bd29a6c661be832cb6a985f0097b6f9c66c0e 0e498c2535c6a13828ec26d91a93f36fb02914d2 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1577162265 +0900	commit: update placeholder
+0e498c2535c6a13828ec26d91a93f36fb02914d2 86a9337248776c678b6d781cbae2a0a2dc22901f Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1577241740 +0900	checkout: moving from demo to master
+86a9337248776c678b6d781cbae2a0a2dc22901f 86a9337248776c678b6d781cbae2a0a2dc22901f Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1577246837 +0900	checkout: moving from master to error-reducer
+86a9337248776c678b6d781cbae2a0a2dc22901f 0000000000000000000000000000000000000000 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1577247187 +0900	Branch: renamed refs/heads/error-reducer to refs/heads/api-error-reducer
+0000000000000000000000000000000000000000 86a9337248776c678b6d781cbae2a0a2dc22901f Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1577247187 +0900	Branch: renamed refs/heads/error-reducer to refs/heads/api-error-reducer
+86a9337248776c678b6d781cbae2a0a2dc22901f d302b15b4fc3323f520c97d53fee251d7d7008d5 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1577249309 +0900	commit: update vscode settings for javascript
+d302b15b4fc3323f520c97d53fee251d7d7008d5 fd21146197aa6170b2ed693e34cd66813fce5c45 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1577256667 +0900	commit: add useScroll hook
+fd21146197aa6170b2ed693e34cd66813fce5c45 83d5a55a4b8589af023499d6114a0b829f4f47ce Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1577262891 +0900	commit: add error message stories
+83d5a55a4b8589af023499d6114a0b829f4f47ce 8bd178c0ee95973c6435a55aec014f87129b3225 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1577324800 +0900	commit: update snackbar reducer for dealing with more type of errors
+8bd178c0ee95973c6435a55aec014f87129b3225 0000000000000000000000000000000000000000 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1577325206 +0900	Branch: renamed refs/heads/api-error-reducer to refs/heads/#1-error-message
+0000000000000000000000000000000000000000 8bd178c0ee95973c6435a55aec014f87129b3225 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1577325206 +0900	Branch: renamed refs/heads/api-error-reducer to refs/heads/#1-error-message
+8bd178c0ee95973c6435a55aec014f87129b3225 8bd178c0ee95973c6435a55aec014f87129b3225 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1577325588 +0900	checkout: moving from #1-error-message to #2-update-ui
+8bd178c0ee95973c6435a55aec014f87129b3225 b88a8e412f37d955fd3168b4d25e0175dcd94593 Yancen Li <yancen.li.gc@ps.hitachi-solutions.com> 1577325695 +0900	merge demo: Merge made by the 'recursive' strategy.
